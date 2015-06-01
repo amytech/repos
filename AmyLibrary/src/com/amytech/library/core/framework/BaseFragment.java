@@ -7,7 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.amytech.library.R;
 import com.amytech.library.core.view.LoadingDialog;
+import com.amytech.library.utils.AppUtils;
 import com.fragmentmaster.app.MasterFragment;
 
 /**
@@ -24,6 +26,11 @@ public abstract class BaseFragment extends MasterFragment {
 
 	private Dialog loadingDialog;
 
+	private BaseActivity baseActivity;
+
+	private long waitTime = 2000;
+	private long touchTime = 0;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		if (rootView == null) {
@@ -36,6 +43,16 @@ public abstract class BaseFragment extends MasterFragment {
 		}
 
 		return rootView;
+	}
+
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		this.baseActivity = (BaseActivity) getActivity();
+	}
+
+	protected BaseActivity getBaseActivity() {
+		return baseActivity;
 	}
 
 	protected View findViewById(int viewID) {
@@ -86,6 +103,21 @@ public abstract class BaseFragment extends MasterFragment {
 	public void hideLoadingDialog() {
 		if (loadingDialog != null && loadingDialog.isShowing()) {
 			loadingDialog.dismiss();
+		}
+	}
+
+	@Override
+	public void onBackPressed() {
+		if (getFragmentManager().getBackStackEntryCount() > 0) {
+			super.onBackPressed();
+		} else {
+			long currentTime = System.currentTimeMillis();
+			if ((currentTime - touchTime) >= waitTime) {
+				Toast.makeText(getBaseActivity(), R.string.exit_press_again, Toast.LENGTH_SHORT).show();
+				touchTime = currentTime;
+			} else {
+				AppUtils.exit();
+			}
 		}
 	}
 }

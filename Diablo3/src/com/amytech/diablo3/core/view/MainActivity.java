@@ -1,7 +1,18 @@
 package com.amytech.diablo3.core.view;
 
-import android.app.Activity;
+import com.amytech.diablo3.core.view.fragment.FragmentHome;
+import com.amytech.library.core.framework.BaseActivity;
+import com.amytech.library.core.framework.BaseFragment;
 
-public class MainActivity extends Activity {
+/**
+ * 主Activity，Fragment容器
+ * 
+ * @author AmyTech
+ */
+public class MainActivity extends BaseActivity {
 
+	@Override
+	protected Class<? extends BaseFragment> getHomeFragment() {
+		return FragmentHome.class;
+	}
 }
