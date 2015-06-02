@@ -2,6 +2,21 @@
 <resources>
 
     <string name="app_name">暗黑III精灵</string>
-
     <string name="enter_diablo">进入 暗黑III</string>
+
+    <!-- 功能列表 -->
+    <string name="function_news">综合新闻</string>
+    <string name="function_blues">官方蓝贴</string>
+    <string name="function_feedback">发送反馈</string>
+    <string name="function_videos">视频欣赏</string>
+    <string name="function_pictures">推荐图集</string>
+    <string name="function_skill_tools">技能模拟器</string>
+    <string name="function_gem_update">宝石升级</string>
+    <string name="function_job_bbs">职业讨论</string>
+    <string name="function_level">天梯排名</string>
+    <string name="function_hero">英雄排名</string>
+    <string name="function_db">数据库</string>
+    <string name="function_setting">系统设置</string>
+    <string name="function_exit">退出程序</string>
+
 </resources>

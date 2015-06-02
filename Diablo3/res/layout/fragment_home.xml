@@ -9,18 +9,17 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_topbar" />
 
-    <RelativeLayout
+    <GridView
+        android:id="@+id/function_grid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_bg_base" >
-
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="TextView" />
-    </RelativeLayout>
+        android:background="@color/color_bg_base"
+        android:horizontalSpacing="@dimen/margin_small"
+        android:numColumns="3"
+        android:padding="@dimen/margin_small"
+        android:scrollbars="none"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="@dimen/margin_large" >
+    </GridView>
 
 </LinearLayout>
