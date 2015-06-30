@@ -19,9 +19,11 @@ import com.fragmentmaster.app.MasterFragment;
  */
 public abstract class BaseFragment extends MasterFragment {
 	protected abstract int getLayoutID();
+	
+	protected abstract void initView();
 
-	protected abstract void showToUser();
-
+	protected void showToUser() {};
+	
 	private View rootView;
 
 	private Dialog loadingDialog;
@@ -35,6 +37,8 @@ public abstract class BaseFragment extends MasterFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		if (rootView == null) {
 			rootView = inflater.inflate(getLayoutID(), container, false);
+			
+			initView();
 		} else {
 			ViewGroup parent = (ViewGroup) rootView.getParent();
 			if (parent != null) {
@@ -87,14 +91,6 @@ public abstract class BaseFragment extends MasterFragment {
 		return getClass().getName();
 	}
 
-	@Override
-	public void setUserVisibleHint(boolean isVisibleToUser) {
-		super.setUserVisibleHint(isVisibleToUser);
-		if (isVisibleToUser) {
-			showToUser();
-		}
-	}
-
 	public void showLoadingDialog(String message, boolean cancelable) {
 		hideLoadingDialog();
 		loadingDialog = LoadingDialog.showLoadingDialog(getActivity(), message, cancelable);
@@ -106,6 +102,14 @@ public abstract class BaseFragment extends MasterFragment {
 		}
 	}
 
+	@Override
+	public void setUserVisibleHint(boolean isVisibleToUser) {
+		super.setUserVisibleHint(isVisibleToUser);
+		if (isVisibleToUser) {
+			showToUser();
+		}
+	}
+	
 	@Override
 	public void onBackPressed() {
 		if (getFragmentManager().getBackStackEntryCount() > 0) {
