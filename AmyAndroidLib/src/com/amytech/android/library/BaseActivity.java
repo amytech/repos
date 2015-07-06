@@ -14,7 +14,11 @@ import android.support.v4.app.FragmentActivity;
  *
  * @author marktlzhai
  */
-public class BaseActivity extends FragmentActivity {
+public abstract class BaseActivity extends FragmentActivity {
+
+	protected abstract int getLayoutID();
+
+	protected abstract void initViews();
 
 	protected String TAG = getClass().getSimpleName();
 
@@ -43,6 +47,9 @@ public class BaseActivity extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(getLayoutID());
+
+		initViews();
 	}
 
 	@Override

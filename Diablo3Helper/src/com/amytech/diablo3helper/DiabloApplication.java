@@ -14,4 +14,8 @@ import com.amytech.android.library.BaseApplication;
  */
 public class DiabloApplication extends BaseApplication {
 
+	@Override
+	public void onCreate() {
+		super.onCreate();
+	}
 }
