@@ -1,7 +1,9 @@
-package com.amytech.diablo3helper;
+package com.amytech.diablo3helper.view;
 
 import android.app.Activity;
 import android.os.Bundle;
+
+import com.amytech.diablo3helper.R;
 
 public class MainActivity extends Activity {
 
@@ -10,5 +12,4 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 	}
-
 }
