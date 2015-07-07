@@ -1,6 +1,6 @@
 package com.amytech.diablo3helper;
 
-import com.amytech.android.library.BaseApplication;
+import com.amytech.android.library.base.BaseApplication;
 
 /**
  * Title: Diablo3Helper <br>

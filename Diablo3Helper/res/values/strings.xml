@@ -3,4 +3,11 @@
 
     <string name="app_name">暗黑3助手</string>
 
+    <!-- HomeActivity -->
+    <string name="tab_info">资讯</string>
+    <string name="tab_skill">技能</string>
+    <string name="tab_items">装备</string>
+    <string name="tab_level">天梯</string>
+    <string name="tab_more">更多</string>
+
 </resources>

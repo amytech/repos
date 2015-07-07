@@ -4,7 +4,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-import com.amytech.android.library.BaseActivity;
+import com.amytech.android.library.base.BaseActivity;
 import com.amytech.diablo3helper.R;
 
 public class SplashActivity extends BaseActivity {

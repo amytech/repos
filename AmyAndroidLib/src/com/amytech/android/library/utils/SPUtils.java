@@ -3,10 +3,10 @@ package com.amytech.android.library.utils;
 import java.util.Map;
 import java.util.Set;
 
-import com.amytech.android.library.BaseApplication;
-
 import android.content.Context;
 import android.content.SharedPreferences;
+
+import com.amytech.android.library.base.BaseApplication;
 
 /**
  * Title: AmyAndroidLib <br>

@@ -1,4 +1,4 @@
-package com.amytech.android.library;
+package com.amytech.android.library.base;
 
 import android.app.Application;
 import android.util.DisplayMetrics;

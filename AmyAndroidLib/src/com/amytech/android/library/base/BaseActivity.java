@@ -1,8 +1,9 @@
-package com.amytech.android.library;
+package com.amytech.android.library.base;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.LayoutInflater;
 
 /**
  * Title: AmyAndroidLib <br>
@@ -21,6 +22,8 @@ public abstract class BaseActivity extends FragmentActivity {
 	protected abstract void initViews();
 
 	protected String TAG = getClass().getSimpleName();
+
+	protected LayoutInflater layoutInflater;
 
 	public void startActivity(Class<? extends BaseActivity> activityClass) {
 		Intent intent = new Intent(this, activityClass);
@@ -48,6 +51,8 @@ public abstract class BaseActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(getLayoutID());
+
+		layoutInflater = LayoutInflater.from(this);
 
 		initViews();
 	}

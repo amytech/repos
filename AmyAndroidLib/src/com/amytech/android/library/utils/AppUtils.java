@@ -15,7 +15,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Process;
 
-import com.amytech.android.library.BaseApplication;
+import com.amytech.android.library.base.BaseApplication;
 
 /**
  * Title: AmyAndroidLib <br>

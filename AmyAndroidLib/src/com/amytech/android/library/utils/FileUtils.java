@@ -16,7 +16,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.amytech.android.library.BaseApplication;
+import com.amytech.android.library.base.BaseApplication;
 
 /**
  * Title: AmyAndroidLib <br>
