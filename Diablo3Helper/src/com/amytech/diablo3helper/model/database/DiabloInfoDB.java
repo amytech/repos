@@ -1,5 +1,6 @@
 package com.amytech.diablo3helper.model.database;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.ContentValues;
@@ -161,8 +162,7 @@ public class DiabloInfoDB extends SQLiteOpenHelper {
 		DiabloInfoModel result = null;
 		Cursor dbRS = null;
 		try {
-			dbRS = db.query(INFO_TABLE_NAME, DiabloInfoModel.Table.CLOUMNS, DiabloInfoModel.Table.ID + " = ?", new String[] { String.valueOf(id) }, null, null,
-					null);
+			dbRS = db.query(INFO_TABLE_NAME, DiabloInfoModel.Table.CLOUMNS, DiabloInfoModel.Table.ID + " = ?", new String[] { String.valueOf(id) }, null, null, null);
 			if (!dbRS.moveToFirst()) {
 				return null;
 			}
@@ -194,7 +194,43 @@ public class DiabloInfoDB extends SQLiteOpenHelper {
 		return null;
 	}
 
-	public List<DiabloInfoModel> queryAll(int limit) {
+	public List<DiabloInfoModel> queryAll(int page) {
+		SQLiteDatabase db = getWritableDatabase();
+		List<DiabloInfoModel> result = new ArrayList<DiabloInfoModel>();
+		Cursor dbRS = null;
+		try {
+			dbRS = db.query(INFO_TABLE_NAME, DiabloInfoModel.Table.CLOUMNS, null, null, null, null, DiabloInfoModel.Table.PUBLISH_DATE + " ASC", "LIMIT " + page * 10 + " OFFSET " + 9);
+			if (!dbRS.moveToFirst()) {
+				return null;
+			}
 
+			do {
+				DiabloInfoModel model = new DiabloInfoModel();
+				model.id = dbRS.getInt(dbRS.getColumnIndex(DiabloInfoModel.Table.ID));
+				model.title = dbRS.getString(dbRS.getColumnIndex(DiabloInfoModel.Table.TITLE));
+				model.desc = dbRS.getString(dbRS.getColumnIndex(DiabloInfoModel.Table.DESC));
+				model.imageURL = dbRS.getString(dbRS.getColumnIndex(DiabloInfoModel.Table.IMAGE_URL));
+				model.detailURL = dbRS.getString(dbRS.getColumnIndex(DiabloInfoModel.Table.DETAIL_URL));
+				model.author = dbRS.getString(dbRS.getColumnIndex(DiabloInfoModel.Table.AUTHOR));
+				model.publishDate = dbRS.getLong(dbRS.getColumnIndex(DiabloInfoModel.Table.PUBLISH_DATE));
+
+				result.add(model);
+
+			} while (dbRS.moveToNext());
+
+			return result;
+		} catch (Exception e) {
+			NLog.e("DB ERROR", e);
+		} finally {
+			if (dbRS != null) {
+				dbRS.close();
+			}
+
+			if (db != null) {
+				db.close();
+			}
+		}
+
+		return null;
 	}
 }
