@@ -1,5 +1,7 @@
 package com.amytech.diablo3helper.view.level;
 
+import android.widget.Toast;
+
 import com.amytech.android.library.base.extras.BaseTabItemFragment;
 import com.amytech.diablo3helper.R;
 
@@ -20,6 +22,12 @@ public class TabFragmentLevel extends BaseTabItemFragment {
 
 	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
+		Toast.makeText(getActivity(), "TabFragmentLevel -> onResume", Toast.LENGTH_SHORT).show();
+	}
+	
 	@Override
 	protected int getLayoutID() {
 		return R.layout.fragment_level;

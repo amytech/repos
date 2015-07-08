@@ -1,13 +1,20 @@
 package com.amytech.android.library.utils;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnKeyListener;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.amytech.android.library.R;
 
 /**
  * UI相关工具类
@@ -15,6 +22,8 @@ import android.widget.TextView;
  * @author AmyTech
  */
 public class UIUtils {
+
+	private static Dialog dialog;
 
 	public static final float getHeightInPx(Context context) {
 		final float height = context.getResources().getDisplayMetrics().heightPixels;
@@ -118,5 +127,57 @@ public class UIUtils {
 			return;
 		}
 		tv.setTypeface(tf);
+	}
+
+	/**
+	 * 显示加载框
+	 * 
+	 * @param context
+	 * @param message
+	 * @param cancelable
+	 * @return
+	 */
+	public static Dialog showProgressDialogTips(Context context, int messageRes, boolean cancelable) {
+		return showProgressDialogTips(context, context.getString(messageRes), cancelable);
+	}
+
+	/**
+	 * 显示加载框
+	 * 
+	 * @param context
+	 * @param message
+	 * @param cancelable
+	 * @return
+	 */
+	public static Dialog showProgressDialogTips(Context context, String message, boolean cancelable) {
+		if (dialog == null) {
+			dialog = new Dialog(context, R.style.ProgressDialogTips);
+			dialog.setContentView(R.layout.common_block_toast_tips);
+		}
+		TextView messageView = (TextView) dialog.findViewById(R.id.tip_message);
+		messageView.setText(message);
+		dialog.setCancelable(cancelable);
+		dialog.setOnKeyListener(new OnKeyListener() {
+
+			@Override
+			public boolean onKey(DialogInterface dilg, int keyCode, KeyEvent event) {
+				if (keyCode == KeyEvent.KEYCODE_BACK) {
+					if (dialog.isShowing()) {
+						dialog.dismiss();
+					}
+				}
+				return false;
+			}
+		});
+		dialog.show();
+		return dialog;
+	}
+
+	public static void showToast(Context context, int messageRes) {
+		Toast.makeText(context, messageRes, Toast.LENGTH_SHORT).show();
+	}
+
+	public static void showToast(Context context, String message) {
+		Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
 	}
 }

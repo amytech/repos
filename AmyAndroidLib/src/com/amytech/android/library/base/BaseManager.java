@@ -1,5 +1,7 @@
 package com.amytech.android.library.base;
 
+import android.content.Context;
+
 import com.amytech.android.library.utils.asynchttp.AsyncHttpClient;
 
 /**
@@ -14,4 +16,12 @@ import com.amytech.android.library.utils.asynchttp.AsyncHttpClient;
  */
 public class BaseManager {
 	protected static final AsyncHttpClient CLIENT = new AsyncHttpClient();
+
+	protected Context context;
+
+	public BaseManager(Context context) {
+		this.context = context;
+
+		CLIENT.setUserAgent("Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36");
+	}
 }

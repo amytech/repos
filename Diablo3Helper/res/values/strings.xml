@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">暗黑3助手</string>
+    <string name="refresh_lastupdate_label">更新时间 : {0}</string>
 
     <!-- HomeActivity -->
     <string name="tab_info">资讯</string>

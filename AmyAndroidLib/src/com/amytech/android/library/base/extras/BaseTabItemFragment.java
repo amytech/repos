@@ -14,13 +14,4 @@ import com.amytech.android.library.base.BaseFragment;
  */
 public abstract class BaseTabItemFragment extends BaseFragment {
 
-	@Override
-	public void setUserVisibleHint(boolean isVisibleToUser) {
-		super.setUserVisibleHint(isVisibleToUser);
-		if (isVisibleToUser) {
-			showToUser();
-		}
-	}
-
-	protected abstract void showToUser();
 }

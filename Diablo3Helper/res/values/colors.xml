@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Topbar标题颜色 -->
+    <color name="color_topbar_title">#FFB61B</color>
+    <color name="color_topbar_title_shadow">#FFD37A</color>
+
+</resources>

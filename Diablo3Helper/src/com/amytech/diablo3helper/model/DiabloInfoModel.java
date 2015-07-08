@@ -29,19 +29,20 @@ public class DiabloInfoModel implements Serializable {
 
 	public String detailURL = "";
 
-	public String author = "";
+	public DiabloInfoModel() {
+		super();
+	}
 
-	public long publishDate = 0;
+	public DiabloInfoModel(String title, String desc, String imageURL, String detailURL) {
+		super();
+		this.title = title;
+		this.desc = desc;
+		this.imageURL = imageURL;
+		this.detailURL = detailURL;
+	}
 
-	public static final class Table {
-		public static final String ID = "_id";
-		public static final String TITLE = "title";
-		public static final String DESC = "desc";
-		public static final String IMAGE_URL = "imageURL";
-		public static final String DETAIL_URL = "detailURL";
-		public static final String AUTHOR = "author";
-		public static final String PUBLISH_DATE = "publishDate";
-
-		public static final String[] CLOUMNS = new String[] { ID, TITLE, DESC, IMAGE_URL, DETAIL_URL, AUTHOR, PUBLISH_DATE };
+	@Override
+	public String toString() {
+		return title;
 	}
 }

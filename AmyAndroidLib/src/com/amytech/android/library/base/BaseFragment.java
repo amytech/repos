@@ -23,6 +23,9 @@ public abstract class BaseFragment extends Fragment {
 
 	protected abstract void initViews();
 
+	protected void showToUser() {
+	}
+
 	protected View rootView;
 
 	@Override
@@ -39,6 +42,14 @@ public abstract class BaseFragment extends Fragment {
 			}
 		}
 		return rootView;
+	}
+
+	@Override
+	public void setUserVisibleHint(boolean isVisibleToUser) {
+		super.setUserVisibleHint(isVisibleToUser);
+		if (getUserVisibleHint()) {
+			showToUser();
+		}
 	}
 
 	public View findViewById(int id) {

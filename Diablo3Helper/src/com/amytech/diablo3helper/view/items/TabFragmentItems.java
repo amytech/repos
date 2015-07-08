@@ -1,5 +1,7 @@
 package com.amytech.diablo3helper.view.items;
 
+import android.widget.Toast;
+
 import com.amytech.android.library.base.extras.BaseTabItemFragment;
 import com.amytech.diablo3helper.R;
 
@@ -20,6 +22,12 @@ public class TabFragmentItems extends BaseTabItemFragment {
 
 	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
+		Toast.makeText(getActivity(), "TabFragmentItems -> onResume", Toast.LENGTH_SHORT).show();
+	}
+	
 	@Override
 	protected int getLayoutID() {
 		return R.layout.fragment_items;

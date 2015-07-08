@@ -2,10 +2,18 @@
 <resources>
 
     <!-- 默认的按钮颜色 -->
-    <color name="color_button">#0080B3</color>
+    <color name="color_base_button">#BD3F13</color>
     <!-- 默认的按钮颜色（按下） -->
-    <color name="color_button_press">#28ACDC</color>
+    <color name="color_base_button_press">#974128</color>
     <!-- 默认的按钮颜色（不可用） -->
-    <color name="color_button_disable">#DFDFDF</color>
+    <color name="color_base_button_disable">#1D0C06</color>
+
+    <!-- 默认界面颜色 -->
+    <color name="color_base_background">#1F2121</color>
+
+    <!-- 默认标题颜色 -->
+    <color name="color_base_title">#E9D8A7</color>
+    <color name="color_base_subtitle">#7F6F5C</color>
+    <color name="color_base_body">#7C7B78</color>
 
 </resources>

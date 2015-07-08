@@ -14,7 +14,6 @@
 
         <Button
             android:id="@+id/splash_enter_btn"
-            style="@style/font_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
@@ -22,7 +21,9 @@
             android:background="@drawable/selector_button"
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
-            android:text="@string/enter" />
+            android:text="@string/enter"
+            android:textColor="@color/color_base_title"
+            android:textSize="22sp" />
     </LinearLayout>
 
 </RelativeLayout>

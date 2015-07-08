@@ -1,6 +1,7 @@
 package com.amytech.diablo3helper;
 
 import com.amytech.android.library.base.BaseApplication;
+import com.amytech.android.library.utils.ImageUtils;
 
 /**
  * Title: Diablo3Helper <br>
@@ -17,5 +18,7 @@ public class DiabloApplication extends BaseApplication {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+
+		ImageUtils.init(this);
 	}
 }

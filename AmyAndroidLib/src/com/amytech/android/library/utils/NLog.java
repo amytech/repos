@@ -85,12 +85,16 @@ public class NLog {
 		printCollection(NLog.class, collection);
 	}
 
-	public static void printCollection(Class<?> clazz, Collection<?> collection) {
-		Log.d(clazz.getSimpleName(), "====================Collection Begin=====================");
+	public static void printCollection(String tag, Collection<?> collection) {
+		Log.d(tag, "====================Collection Begin=====================");
 		for (Object obj : collection) {
-			Log.d(clazz.getSimpleName(), obj.toString());
+			Log.d(tag, obj.toString());
 		}
-		Log.d(clazz.getSimpleName(), "====================Collection End=====================");
+		Log.d(tag, "====================Collection End=====================");
+	}
+
+	public static void printCollection(Class<?> clazz, Collection<?> collection) {
+		printCollection(clazz.getSimpleName(), collection);
 	}
 
 	public static void printCollection(Object[] collection) {

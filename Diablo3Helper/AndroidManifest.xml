@@ -8,6 +8,12 @@
         android:minSdkVersion="14"
         android:targetSdkVersion="22" />
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <application
         android:name="com.amytech.diablo3helper.DiabloApplication"
         android:allowBackup="true"
@@ -24,6 +30,11 @@
             </intent-filter>
         </activity>
         <activity android:name="com.amytech.diablo3helper.view.HomeActivity" />
+        <activity android:name="com.amytech.diablo3helper.view.WebViewActivity" />
+
+        <meta-data
+            android:name="QBSDKAppKey"
+            android:value="3kNNloPcbXe2qZOAO+Ol6LMm" />
     </application>
 
 </manifest>
