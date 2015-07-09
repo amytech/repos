@@ -11,7 +11,6 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.amytech.android.library.R;
 import com.amytech.android.library.base.BaseApplication;
@@ -84,6 +83,7 @@ public class X5WebView extends RelativeLayout implements LoadingInterface {
 
 		x5Webview = (WebView) rootView.findViewById(R.id.x5webview);
 		loadingView = (LoadingView) rootView.findViewById(R.id.x5loading);
+		loadingView.setLoadingInterface(this);
 		initWebview();
 
 		addView(rootView, LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
@@ -113,8 +113,9 @@ public class X5WebView extends RelativeLayout implements LoadingInterface {
 
 		settings.setUseWideViewPort(true);
 		settings.setLoadWithOverviewMode(true);
-		settings.setSupportZoom(false);
-		settings.setBuiltInZoomControls(false);
+		settings.setSupportZoom(true);
+		settings.setBuiltInZoomControls(true);
+		settings.setDisplayZoomControls(false);
 		settings.setBlockNetworkImage(false);
 		setBackgroundResource(android.R.color.transparent);
 
@@ -172,6 +173,8 @@ public class X5WebView extends RelativeLayout implements LoadingInterface {
 
 	private class EsWebViewClient extends WebViewClient {
 
+		private boolean loadingError = false;
+
 		@Override
 		public boolean shouldOverrideUrlLoading(WebView view, String url) {
 			view.loadUrl(url);
@@ -194,8 +197,14 @@ public class X5WebView extends RelativeLayout implements LoadingInterface {
 				listener.onWebPageLoadSucceed();
 			}
 
-			x5Webview.setVisibility(View.VISIBLE);
-			loadingView.setVisibility(View.GONE);
+			if (loadingError) {
+				x5Webview.setVisibility(View.GONE);
+				loadingView.setVisibility(View.VISIBLE);
+				loadingView.loadingError();
+			} else {
+				x5Webview.setVisibility(View.VISIBLE);
+				loadingView.setVisibility(View.GONE);
+			}
 
 			view.clearAnimation();
 			view.clearDisappearingChildren();
@@ -211,6 +220,8 @@ public class X5WebView extends RelativeLayout implements LoadingInterface {
 			x5Webview.setVisibility(View.GONE);
 			loadingView.startLoading();
 			loadingView.setVisibility(View.VISIBLE);
+
+			loadingError = false;
 		}
 
 		@Override
@@ -223,6 +234,8 @@ public class X5WebView extends RelativeLayout implements LoadingInterface {
 			x5Webview.setVisibility(View.GONE);
 			loadingView.loadingError();
 			loadingView.setVisibility(View.VISIBLE);
+
+			loadingError = true;
 		}
 
 		@Override

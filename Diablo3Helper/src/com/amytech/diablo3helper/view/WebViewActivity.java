@@ -43,8 +43,7 @@ public class WebViewActivity extends BaseActivity {
 			DiabloInfoModel diabloModel = (DiabloInfoModel) data.getSerializable(DataKey.DIABLO_MODEL);
 			if (diabloModel != null) {
 				topbar.setTitle(diabloModel.title);
-//				x5Webview.startLoadWebPage(diabloModel.detailURL);
-				x5Webview.startLoadWebPage("https://sldjf.asdjfas");
+				x5Webview.startLoadWebPage(diabloModel.detailURL);
 			}
 		}
 	}
