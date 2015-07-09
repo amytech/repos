@@ -1,8 +1,5 @@
 <resources>
 
-    <!-- Topbar Height -->
-    <dimen name="height_topbar">50dp</dimen>
-
     <!-- TabFragmentInfo -->
     <dimen name="height_info_item">100dp</dimen>
     <dimen name="size_info_image">80dp</dimen>

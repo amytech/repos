@@ -22,13 +22,14 @@ import com.amytech.android.library.base.extras.BaseTabItemFragment;
 import com.amytech.android.library.utils.ImageUtils;
 import com.amytech.android.library.utils.TimeUtils;
 import com.amytech.android.library.utils.UIUtils;
+import com.amytech.android.library.views.Topbar;
+import com.amytech.android.library.views.Topbar.TopbarIcon;
 import com.amytech.diablo3helper.R;
 import com.amytech.diablo3helper.manager.DiabloInfoManager;
 import com.amytech.diablo3helper.manager.DiabloInfoManager.LoadInfoCallback;
 import com.amytech.diablo3helper.manager.DiabloInfoManager.ReloadInfoCallback;
 import com.amytech.diablo3helper.model.DiabloInfoModel;
 import com.amytech.diablo3helper.view.WebViewActivity;
-import com.amytech.diablo3helper.widget.Topbar;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
@@ -74,7 +75,9 @@ public class TabFragmentInfo extends BaseTabItemFragment implements LoadInfoCall
 	@Override
 	protected void initViews() {
 		topbar = (Topbar) findViewById(R.id.topbar);
-		topbar.setTitle(R.string.tab_info);
+		topbar.setTitle(R.string.app_name);
+		topbar.configLeftImgBtn(TopbarIcon.NONE, null);
+		topbar.configRightImgBtn(TopbarIcon.NONE, null);
 
 		infoListView = (PullToRefreshListView) findViewById(R.id.info_listview);
 		initInfoListview();

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
+import android.widget.Toast;
 
 /**
  * Title: AmyAndroidLib <br>
@@ -55,6 +56,14 @@ public abstract class BaseActivity extends FragmentActivity {
 		layoutInflater = LayoutInflater.from(this);
 
 		initViews();
+	}
+
+	protected void showToast(String message) {
+		Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+	}
+
+	protected void showToast(int messageRes) {
+		Toast.makeText(this, messageRes, Toast.LENGTH_SHORT).show();
 	}
 
 	@Override

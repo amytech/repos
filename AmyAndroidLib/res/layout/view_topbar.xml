@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/height_topbar"
+    android:background="@color/color_topbar_bg" >
+
+    <LinearLayout
+        android:id="@+id/topbar_imgbtn_left_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/topbar_imgbtn_left"
+            android:layout_width="@dimen/height_topbar"
+            android:layout_height="@dimen/height_topbar"
+            android:background="@drawable/selector_topbar_bg"
+            android:clickable="true"
+            android:padding="10dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_eyes" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/black" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/topbar_title"
+        style="@style/font_topbar_title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_toLeftOf="@+id/topbar_imgbtn_right_layout"
+        android:layout_toRightOf="@+id/topbar_imgbtn_left_layout"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:singleLine="true"
+        android:text="@string/loading_error" />
+
+    <LinearLayout
+        android:id="@+id/topbar_imgbtn_right_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:orientation="horizontal" >
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:background="@android:color/black" />
+
+        <ImageView
+            android:id="@+id/topbar_imgbtn_right"
+            android:layout_width="@dimen/height_topbar"
+            android:layout_height="@dimen/height_topbar"
+            android:background="@drawable/selector_topbar_bg"
+            android:clickable="true"
+            android:padding="10dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_share" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/black" />
+
+</RelativeLayout>

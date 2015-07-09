@@ -16,4 +16,10 @@
     <color name="color_base_subtitle">#7F6F5C</color>
     <color name="color_base_body">#7C7B78</color>
 
+    <!-- Topbar标题颜色 -->
+    <color name="color_topbar_bg">#3F4449</color>
+    <color name="color_topbar_press">#1D2127</color>
+    <color name="color_topbar_title">#FFB61B</color>
+    <color name="color_topbar_title_shadow">#FFD37A</color>
+
 </resources>

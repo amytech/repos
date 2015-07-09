@@ -5,7 +5,7 @@
     android:background="@color/color_base_background"
     android:orientation="vertical" >
 
-    <com.amytech.diablo3helper.widget.Topbar
+    <com.amytech.android.library.views.Topbar
         android:id="@+id/topbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_topbar" />
