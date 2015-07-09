@@ -4,6 +4,11 @@
     <string name="app_name">暗黑3助手</string>
     <string name="refresh_lastupdate_label">更新时间 : {0}</string>
 
+    <!-- SplashActivity -->
+    <string name="connect_server">正在连接服务器</string>
+    <string name="update_offline_data">更新离线数据: {0}/{1}</string>
+    <string name="please_enter">点击进入享受暗黑的世界</string>
+
     <!-- HomeActivity -->
     <string name="tab_info">资讯</string>
     <string name="tab_skill">技能</string>

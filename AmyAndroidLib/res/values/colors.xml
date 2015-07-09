@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- 半透明黑色 -->
+    <color name="color_black_alpha">#AA000000</color>
+
     <!-- 默认的按钮颜色 -->
     <color name="color_base_button">#BD3F13</color>
     <!-- 默认的按钮颜色（按下） -->
