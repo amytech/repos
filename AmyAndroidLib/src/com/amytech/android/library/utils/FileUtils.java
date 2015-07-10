@@ -536,4 +536,30 @@ public class FileUtils {
 		File file = new File(path);
 		return (file.exists() && file.isFile() ? file.length() : -1);
 	}
+
+	public static File createNewFile(String filePath, String fileName) {
+		File newFile = new File(filePath, fileName);
+		if (!newFile.exists()) {
+			if (!newFile.getParentFile().exists()) {
+				newFile.getParentFile().mkdirs();
+
+				try {
+					newFile.createNewFile();
+					return newFile;
+				} catch (IOException e) {
+					e.printStackTrace();
+					return null;
+				}
+			} else {
+				try {
+					newFile.createNewFile();
+					return newFile;
+				} catch (IOException e) {
+					return null;
+				}
+			}
+		} else {
+			return newFile;
+		}
+	}
 }

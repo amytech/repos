@@ -1,8 +1,8 @@
 package com.amytech.diablo3helper.view;
 
+import java.io.File;
 import java.text.MessageFormat;
 
-import android.os.Environment;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -12,21 +12,26 @@ import android.widget.TextView;
 import com.amytech.android.library.base.BaseActivity;
 import com.amytech.android.library.utils.AppUtils;
 import com.amytech.android.library.utils.FileUtils;
-import com.amytech.android.library.utils.download.DownloadUtils;
-import com.amytech.android.library.utils.download.DownloadUtils.OnDownloadListener;
+import com.amytech.android.library.utils.download.DownloadRequest;
+import com.amytech.android.library.utils.download.DownloadStatusListener;
+import com.amytech.android.library.utils.download.ThinDownloadManager;
 import com.amytech.diablo3helper.R;
 
-public class SplashActivity extends BaseActivity implements OnDownloadListener {
+public class SplashActivity extends BaseActivity implements DownloadStatusListener {
 
-	private static final String TEST_URL = "https://github.com/amytech/repos/raw/master/Files/DiabloHelper.conf";
+	private static final String TEST_URL = "https://github.com/amytech/repos/blob/master/Files/448601869.db?raw=true";
+
+	private int downloadID = -1;
+
+	private DownloadRequest downloadRequest;
 
 	private Button enterButton;
 
 	private TextView progressText;
 
-	private ProgressBar progress;
+	private ProgressBar progressView;
 
-	private DownloadUtils downloader;
+	private ThinDownloadManager downloader;
 
 	@Override
 	protected int getLayoutID() {
@@ -38,40 +43,32 @@ public class SplashActivity extends BaseActivity implements OnDownloadListener {
 		enterButton = (Button) findViewById(R.id.splash_enter_btn);
 
 		progressText = (TextView) findViewById(R.id.progress_text);
-		progress = (ProgressBar) findViewById(R.id.splash_progress);
-		progress.setVisibility(View.VISIBLE);
+		progressView = (ProgressBar) findViewById(R.id.splash_progress);
+		progressView.setVisibility(View.VISIBLE);
 
-		downloader = new DownloadUtils(Environment.getExternalStorageState(), "DiabloHelper.conf", TEST_URL, this);
-		downloader.setOnDownloadListener(this);
-		downloader.start();
+		File dbFile = new File(FileUtils.getFilesDir(), "server_data.db");
+		if (dbFile.exists()) {
+			onDownloadComplete(0);
+		} else {
+			downloader = new ThinDownloadManager();
+			downloadRequest = new DownloadRequest(TEST_URL);
+			downloadRequest.setDownloadListener(this);
+			downloadRequest.setDestinationFile(dbFile);
+			downloadID = downloader.add(downloadRequest);
+		}
 	}
 
 	@Override
 	public void onBackPressed() {
-		downloader.delete();
+		if (downloadID > 0) {
+			downloader.cancel(downloadID);
+		}
 		AppUtils.exit();
 	}
 
-	private int fileSize;
-
 	@Override
-	public void downloadStart(int fileSize) {
-		this.fileSize = fileSize;
-		progress.setVisibility(View.VISIBLE);
-
-		progress.setMax(fileSize);
-		progress.setProgress(0);
-	}
-
-	@Override
-	public void downloadProgress(int downloadedSize) {
-		progressText.setText(MessageFormat.format(getString(R.string.update_offline_data), downloadedSize, fileSize));
-		progress.setProgress(downloadedSize);
-	}
-
-	@Override
-	public void downloadEnd() {
-		progress.setVisibility(View.GONE);
+	public void onDownloadComplete(int id) {
+		progressView.setVisibility(View.GONE);
 		progressText.setText(R.string.please_enter);
 		enterButton.setVisibility(View.VISIBLE);
 		enterButton.setOnClickListener(new OnClickListener() {
@@ -83,17 +80,22 @@ public class SplashActivity extends BaseActivity implements OnDownloadListener {
 	}
 
 	@Override
-	public void downloadError() {
-		progress.setVisibility(View.GONE);
+	public void onDownloadFailed(int id, int errorCode, String errorMessage) {
+		progressView.setVisibility(View.GONE);
 		progressText.setText(R.string.download_error);
 
 		enterButton.setVisibility(View.VISIBLE);
 		enterButton.setText(R.string.retry);
 		enterButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				downloader.reset();
-				downloader.start();
+				downloadID = downloader.add(downloadRequest);
 			}
 		});
+	}
+
+	@Override
+	public void onProgress(int id, long totalBytes, long downloadedBytes, int progress) {
+		progressText.setText(MessageFormat.format(getString(R.string.update_offline_data), downloadedBytes, totalBytes));
+		progressView.setProgress(progress);
 	}
 }

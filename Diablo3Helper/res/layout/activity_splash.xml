@@ -32,6 +32,8 @@
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:indeterminateDrawable="@drawable/progress_bg"
+            android:max="100"
+            android:progress="0"
             android:visibility="gone" />
     </LinearLayout>
 

@@ -3,7 +3,6 @@ package com.amytech.diablo3helper.view;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Toast;
 
 import com.amytech.android.library.base.BaseActivity;
 import com.amytech.android.library.views.Topbar;
@@ -68,7 +67,7 @@ public class WebViewActivity extends BaseActivity {
 		if (x5Webview.browserCanBack()) {
 			x5Webview.navigateBack();
 		} else {
-			super.onBackPressed();
+			finish();
 		}
 	}
 }
