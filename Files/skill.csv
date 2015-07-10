@@ -1,0 +1,24 @@
+_alias,_job,_name,_desc,_icon
+a,巫医,剧毒飞镖,这是一种修为法术。施放修为法术无需消耗法力值。\n射出一支致命剧毒飞镖，造成 185% 的武器伤害（作为毒性伤害），并在接下来的 2 秒内造成额外 40% 的武器伤害（作为毒性伤害）。,http://img3.cache.netease.com/game/diablo3/icons/31052/cn/skills/42/witchdoctor_poisondart_normal.png
+b,巫医,尸蛛,这是一种修为法术。施放修为法术无需消耗法力值。\n掷出一只装有 4 只蜘蛛的坛子，蜘蛛会攻击附近敌人，在死去之前造成总共 576% 的武器伤害（作为物理伤害）。,http://img3.cache.netease.com/game/diablo3/icons/31052/cn/skills/42/witchdoctor_corpsespiders_normal.png
+W,巫医,蟾蜍之疫,这是一种修为法术。施放修为法术无需消耗法力值。\n放出一群蟾蜍，对踩中的任何敌人造成 190% 的武器伤害（作为毒性伤害）。,http://img3.cache.netease.com/game/diablo3/icons/31052/cn/skills/42/witchdoctor_plagueoftoads_normal.png
+S,巫医,烈焰炸弹,这是一种修为法术。施放修为法术无需消耗法力值。\n掷出一个爆炸头骨，对位于 8 码内的所有敌人造成 155% 的武器伤害（作为火焰伤害）。,http://img3.cache.netease.com/game/diablo3/icons/31052/cn/skills/42/witchdoctor_firebomb_normal.png
+Z,巫医,亡者之握,消耗： 150 点法力值\n冷却时间： 8 秒\n从地下伸出亡者之手，使敌人的移动速度降低 60%，并在 8 秒内造成 560% 的武器伤害（作为物理伤害）。,http://img3.cache.netease.com/game/diablo3/icons/31052/cn/skills/42/witchdoctor_graspofthedead_normal.png
+c,巫医,火蝠,消耗：初始消耗 150 点法力值，且在引导时消耗额外 75 点法力值。\n召唤火蝠大军灼烧你面前的敌人，造成 425% 的武器伤害（作为火焰伤害）。,http://img3.cache.netease.com/game/diablo3/icons/31052/cn/skills/42/witchdoctor_firebats_normal.png
+e,巫医,蚀魂,消耗： 50 点法力值\n使敌人被鬼魂纠缠，在 12 秒内造成 4000% 的武器伤害（作为冰霜伤害）。如果目标死亡，鬼魂则会自动纠缠附近的另一名敌人。\n一个敌人同时只会受到一个蚀魂效果的影响。,http://img3.cache.netease.com/game/diablo3/icons/31052/cn/skills/42/witchdoctor_haunt_normal.png
+h,巫医,瘟疫虫群,消耗： 300 点法力值\n释放瘟疫虫群席卷一名敌人，在 8 秒内造成 1040% 的武器伤害（作为毒性伤害）。\n虫群会跳到附近其它敌人身上。,http://img3.cache.netease.com/game/diablo3/icons/31052/cn/skills/42/witchdoctor_locustswarm_normal.png
+Y,巫医,召唤僵尸犬,冷却时间： 45 秒\n从深渊中召唤3只僵尸犬来协同作战。每只僵尸犬每一击可造成相当于你武器伤害30% 的伤害（作为物理伤害）。,http://img3.cache.netease.com/game/diablo3/icons/31052/cn/skills/42/witchdoctor_summonzombiedog_normal.png
+X,巫医,惧灵,冷却时间： 12 秒\n戴上一个鬼怪面具，惊吓位于 18 码内的所有敌人，使其因恐惧而逃跑，且被定身 3 秒。,http://img3.cache.netease.com/game/diablo3/icons/31052/cn/skills/42/witchdoctor_horrify_normal.png
+U,巫医,灵魂行走,冷却时间： 12 秒\n魂魄出窍，进入灵魂界域，持续 2 秒。\n在灵魂位面中你的移动不受限制。\n该技能在效果结束前不会触发冷却时间。,http://img3.cache.netease.com/game/diablo3/icons/31052/cn/skills/42/witchdoctor_spiritwalk_normal.png
+i,巫医,妖术,冷却时间： 15 秒\n召唤一个鬼娃萨满，持续 12 秒，会将若干敌人变为小鸡。被变形的敌人将无法作出攻击行为，并会受到额外 10% 的伤害。,http://img3.cache.netease.com/game/diablo3/icons/31052/cn/skills/42/witchdoctor_hex_normal.png
+d,巫医,灵魂收割,冷却时间： 15 秒\n从位于 18 码内的最多 5 个敌人身上汲取生命之力。从每个受影响的敌人身上获得 3% 的智力。该效果可持续 30 秒。,http://img3.cache.netease.com/game/diablo3/icons/31052/cn/skills/42/witchdoctor_soulharvest_normal.png
+V,巫医,牺牲,放逐一只已召唤的僵尸犬并使其爆炸，对位于 12 码内的所有敌人造成相当于你武器伤害1090% 的伤害（作为物理伤害）。,http://img3.cache.netease.com/game/diablo3/icons/31052/cn/skills/42/witchdoctor_sacrifice_normal.png
+j,巫医,群体混乱,冷却时间： 60 秒\n激起敌人内心的偏妄，使敌人陷入混乱，并使部分敌人转而为你作战，持续 12 秒。,http://img3.cache.netease.com/game/diablo3/icons/31052/cn/skills/42/witchdoctor_massconfusion_normal.png
+f,巫医,僵尸死士,消耗： 150 点法力值\n召唤一只狂热的自我毁灭型僵尸，对其行进路线上遇到的所有敌人造成 560% 的武器伤害（作为毒性伤害）。,http://img3.cache.netease.com/game/diablo3/icons/31052/cn/skills/42/witchdoctor_zombiecharger_normal.png
+g,巫医,灵魂弹幕,消耗： 100 点法力值\n用4发灵魂飞弹轰击目标，总共造成 425% 的武器伤害（作为冰霜伤害）。,http://img3.cache.netease.com/game/diablo3/icons/31052/cn/skills/42/witchdoctor_spiritbarrage_normal.png
+R,巫医,酸蚀之云,消耗： 175 点法力值\n酸雨倾盆而降，初始造成 300% 的武器伤害（作为毒性伤害），并对留在酸雨倾降范围内的敌人造成后续 360% 的武器伤害（作为毒性伤害），持续 3 秒。,http://img3.cache.netease.com/game/diablo3/icons/31052/cn/skills/42/witchdoctor_acidcloud_normal.png
+k,巫医,僵尸之墙,冷却时间： 8 秒\n一排28 码宽的僵尸从地底爬出，攻击附近的敌人，在 4 秒内造成 200% 的武器伤害（作为物理伤害）。,http://img3.cache.netease.com/game/diablo3/icons/31052/cn/skills/42/witchdoctor_wallofzombies_normal.png
+l,巫医,食人鱼,消耗： 250 点法力值\n冷却时间： 8 秒\n召唤一池致命的食人鱼，在 8 秒内造成 400% 的武器伤害（作为毒性伤害）。受到影响的敌人会额外受到 15% 的伤害。,http://img3.cache.netease.com/game/diablo3/icons/31052/cn/skills/42/witchdoctor_piranhas_normal.png
+T,巫医,僵尸巨兽,冷却时间： 60 秒\n召唤一只僵尸巨兽为你作战。僵尸巨兽的攻击可造成相当于你武器伤害 100% 的伤害（作为物理伤害）。,http://img3.cache.netease.com/game/diablo3/icons/31052/cn/skills/42/witchdoctor_gargantuan_normal.png
+Q,巫医,巫毒狂舞,冷却时间： 120 秒\n召唤一个鬼娃，表演一段崇神仪式之舞，使附近所有同伴的攻击和移动速度提高 20% ，持续 20 秒。,http://img3.cache.netease.com/game/diablo3/icons/31052/cn/skills/42/witchdoctor_bigbadvoodoo_normal.png
+P,巫医,鬼娃大军,冷却时间： 120 秒\n召唤一支由 5 名手持匕首的鬼娃组成的大军与你并肩作战，持续 20 秒。鬼娃攻击可造成相当于你武器伤害180% 的伤害（作为物理伤害）。,http://img3.cache.netease.com/game/diablo3/icons/31052/cn/skills/42/witchdoctor_fetisharmy_normal.png
