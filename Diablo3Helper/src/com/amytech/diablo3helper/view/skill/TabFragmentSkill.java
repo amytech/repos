@@ -3,6 +3,9 @@ package com.amytech.diablo3helper.view.skill;
 import java.util.List;
 import java.util.Map;
 
+import android.view.View;
+import android.view.View.OnClickListener;
+
 import com.amytech.android.library.base.extras.BaseTabItemFragment;
 import com.amytech.android.library.utils.NLog;
 import com.amytech.android.library.views.Topbar;
@@ -39,6 +42,11 @@ public class TabFragmentSkill extends BaseTabItemFragment {
 	protected void initViews() {
 		topbar = (Topbar) findViewById(R.id.topbar);
 		topbar.setTitle(R.string.skill_simulator);
+		topbar.configRightImgBtn(TopbarIcon.SHARE, new OnClickListener() {
+			public void onClick(View v) {
+				showToast("share to friend.");
+			}
+		});
 
 		Map<String, List<DiabloSkillModel>> skills = SkillManager.getInstance(getActivity()).loadSkills();
 		NLog.d(getClass(), skills);

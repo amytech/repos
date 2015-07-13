@@ -6,8 +6,8 @@
 
     <LinearLayout
         android:id="@+id/topbar_imgbtn_left_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_width="@dimen/width_topbar_icon"
+        android:layout_height="@dimen/height_topbar_icon"
         android:layout_alignParentLeft="true"
         android:orientation="horizontal" >
 
@@ -22,6 +22,7 @@
             android:src="@drawable/icon_eyes" />
 
         <View
+            android:id="@+id/topbar_divider_left"
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:background="@android:color/black" />
@@ -44,12 +45,13 @@
 
     <LinearLayout
         android:id="@+id/topbar_imgbtn_right_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_width="@dimen/width_topbar_icon"
+        android:layout_height="@dimen/height_topbar_icon"
         android:layout_alignParentRight="true"
         android:orientation="horizontal" >
 
         <View
+            android:id="@+id/topbar_divider_right"
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:layout_weight="0"

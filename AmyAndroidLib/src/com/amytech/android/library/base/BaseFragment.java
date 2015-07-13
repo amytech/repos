@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 /**
  * Title: AmyAndroidLib <br>
@@ -42,6 +43,14 @@ public abstract class BaseFragment extends Fragment {
 			}
 		}
 		return rootView;
+	}
+
+	protected void showToast(String message) {
+		Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+	}
+
+	protected void showToast(int messageRes) {
+		Toast.makeText(getActivity(), messageRes, Toast.LENGTH_SHORT).show();
 	}
 
 	@Override

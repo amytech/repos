@@ -50,11 +50,11 @@ public class Topbar extends RelativeLayout {
 
 	private TextView titleView;
 
-	private View leftButtonLayout;
 	private ImageView leftButton;
+	private View leftDivider;
 
-	private View rightButtonLayout;
 	private ImageView rightButton;
+	private View rightDivider;
 
 	public Topbar(Context context) {
 		super(context);
@@ -77,13 +77,15 @@ public class Topbar extends RelativeLayout {
 
 		titleView = (TextView) rootView.findViewById(R.id.topbar_title);
 
-		leftButtonLayout = rootView.findViewById(R.id.topbar_imgbtn_left_layout);
+		leftDivider = rootView.findViewById(R.id.topbar_divider_left);
 		leftButton = (ImageView) rootView.findViewById(R.id.topbar_imgbtn_left);
-		leftButtonLayout.setVisibility(View.GONE);
+		leftDivider.setVisibility(View.GONE);
+		leftButton.setVisibility(View.GONE);
 
-		rightButtonLayout = rootView.findViewById(R.id.topbar_imgbtn_right_layout);
+		rightDivider = rootView.findViewById(R.id.topbar_divider_right);
 		rightButton = (ImageView) rootView.findViewById(R.id.topbar_imgbtn_right);
-		rightButtonLayout.setVisibility(View.GONE);
+		rightDivider.setVisibility(View.GONE);
+		rightButton.setVisibility(View.GONE);
 
 		addView(rootView, LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 	}
@@ -101,9 +103,11 @@ public class Topbar extends RelativeLayout {
 	 */
 	public void configLeftImgBtn(TopbarIcon imgIcon, OnClickListener listener) {
 		if (imgIcon == null || imgIcon.getSelector() == 0) {
-			leftButtonLayout.setVisibility(View.GONE);
+			leftButton.setVisibility(View.GONE);
+			leftDivider.setVisibility(View.GONE);
 		} else {
-			leftButtonLayout.setVisibility(View.VISIBLE);
+			leftButton.setVisibility(View.VISIBLE);
+			leftDivider.setVisibility(View.VISIBLE);
 			leftButton.setImageResource(imgIcon.getSelector());
 			leftButton.setOnClickListener(listener);
 		}
@@ -114,9 +118,11 @@ public class Topbar extends RelativeLayout {
 	 */
 	public void configRightImgBtn(TopbarIcon imgIcon, OnClickListener listener) {
 		if (imgIcon == null || imgIcon.getSelector() == 0) {
-			rightButtonLayout.setVisibility(View.GONE);
+			rightButton.setVisibility(View.GONE);
+			rightDivider.setVisibility(View.GONE);
 		} else {
-			rightButtonLayout.setVisibility(View.VISIBLE);
+			rightButton.setVisibility(View.VISIBLE);
+			rightDivider.setVisibility(View.VISIBLE);
 			rightButton.setImageResource(imgIcon.getSelector());
 			rightButton.setOnClickListener(listener);
 		}

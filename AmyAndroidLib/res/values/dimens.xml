@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Topbar Height -->
+    <!-- Topbar -->
     <dimen name="height_topbar">50dp</dimen>
+    <dimen name="height_topbar_icon">50dp</dimen>
+    <dimen name="width_topbar_icon">51dp</dimen>
 
 </resources>
