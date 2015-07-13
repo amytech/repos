@@ -21,5 +21,6 @@
     <string name="mouse_skill">鼠标技能</string>
     <string name="actionbar_skill">动作条技能</string>
     <string name="passive_skill">被动技能</string>
+    <string name="pls_check_job">选择职业：</string>
 
 </resources>

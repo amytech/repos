@@ -5,9 +5,11 @@ import java.util.Map;
 
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.amytech.android.library.base.extras.BaseTabItemFragment;
-import com.amytech.android.library.utils.NLog;
+import com.amytech.android.library.utils.CollectionUtils;
 import com.amytech.android.library.views.Topbar;
 import com.amytech.android.library.views.Topbar.TopbarIcon;
 import com.amytech.diablo3helper.R;
@@ -28,6 +30,8 @@ public class TabFragmentSkill extends BaseTabItemFragment {
 
 	private Topbar topbar;
 
+	private Spinner checkJobSpinner;
+
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -40,6 +44,8 @@ public class TabFragmentSkill extends BaseTabItemFragment {
 
 	@Override
 	protected void initViews() {
+		Map<String, List<DiabloSkillModel>> skills = SkillManager.getInstance(getActivity()).loadSkills();
+
 		topbar = (Topbar) findViewById(R.id.topbar);
 		topbar.setTitle(R.string.skill_simulator);
 		topbar.configRightImgBtn(TopbarIcon.SHARE, new OnClickListener() {
@@ -48,7 +54,7 @@ public class TabFragmentSkill extends BaseTabItemFragment {
 			}
 		});
 
-		Map<String, List<DiabloSkillModel>> skills = SkillManager.getInstance(getActivity()).loadSkills();
-		NLog.d(getClass(), skills);
+		checkJobSpinner = (Spinner) findViewById(R.id.skill_check_job_spinner);
+		checkJobSpinner.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, CollectionUtils.toList(skills.keySet())));
 	}
 }

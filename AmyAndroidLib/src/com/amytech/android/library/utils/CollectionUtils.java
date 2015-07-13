@@ -1,6 +1,9 @@
 package com.amytech.android.library.utils;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Title: AmyAndroidLib <br>
@@ -25,5 +28,19 @@ public class CollectionUtils {
 
 	public static <E> int size(Collection<E> c) {
 		return c == null ? 0 : c.size();
+	}
+
+	public static List<? extends Object> toList(Set<? extends Object> sets) {
+		List<Object> result = new ArrayList<Object>();
+
+		if (isEmpty(sets)) {
+			return result;
+		}
+
+		for (Object object : sets) {
+			result.add(object);
+		}
+
+		return result;
 	}
 }
