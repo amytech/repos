@@ -1,6 +1,5 @@
 package com.amytech.diablo3helper.view;
 
-import java.io.File;
 import java.text.MessageFormat;
 
 import android.view.View;
@@ -11,15 +10,13 @@ import android.widget.TextView;
 
 import com.amytech.android.library.base.BaseActivity;
 import com.amytech.android.library.utils.AppUtils;
-import com.amytech.android.library.utils.FileUtils;
 import com.amytech.android.library.utils.download.DownloadRequest;
 import com.amytech.android.library.utils.download.DownloadStatusListener;
 import com.amytech.android.library.utils.download.ThinDownloadManager;
 import com.amytech.diablo3helper.R;
+import com.amytech.diablo3helper.manager.Constants;
 
 public class SplashActivity extends BaseActivity implements DownloadStatusListener {
-
-	private static final String TEST_URL = "https://github.com/amytech/repos/blob/master/Files/448601869.db?raw=true";
 
 	private int downloadID = -1;
 
@@ -46,14 +43,13 @@ public class SplashActivity extends BaseActivity implements DownloadStatusListen
 		progressView = (ProgressBar) findViewById(R.id.splash_progress);
 		progressView.setVisibility(View.VISIBLE);
 
-		File dbFile = new File(FileUtils.getFilesDir(), "server_data.db");
-		if (dbFile.exists()) {
+		if (Constants.DB_FILE_SKILL.exists()) {
 			onDownloadComplete(0);
 		} else {
 			downloader = new ThinDownloadManager();
-			downloadRequest = new DownloadRequest(TEST_URL);
+			downloadRequest = new DownloadRequest(Constants.URL_SKILL_DB_FILE);
 			downloadRequest.setDownloadListener(this);
-			downloadRequest.setDestinationFile(dbFile);
+			downloadRequest.setDestinationFile(Constants.DB_FILE_SKILL);
 			downloadID = downloader.add(downloadRequest);
 		}
 	}

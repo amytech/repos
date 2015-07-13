@@ -1,9 +1,15 @@
 package com.amytech.diablo3helper.view.skill;
 
-import android.widget.Toast;
+import java.util.List;
+import java.util.Map;
 
 import com.amytech.android.library.base.extras.BaseTabItemFragment;
+import com.amytech.android.library.utils.NLog;
+import com.amytech.android.library.views.Topbar;
+import com.amytech.android.library.views.Topbar.TopbarIcon;
 import com.amytech.diablo3helper.R;
+import com.amytech.diablo3helper.manager.SkillManager;
+import com.amytech.diablo3helper.model.DiabloSkillModel;
 
 /**
  * Title: Diablo3Helper <br>
@@ -17,17 +23,13 @@ import com.amytech.diablo3helper.R;
  */
 public class TabFragmentSkill extends BaseTabItemFragment {
 
-	@Override
-	protected void showToUser() {
-
-	}
+	private Topbar topbar;
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		Toast.makeText(getActivity(), "TabFragmentSkill -> onResume", Toast.LENGTH_SHORT).show();
 	}
-	
+
 	@Override
 	protected int getLayoutID() {
 		return R.layout.fragment_skill;
@@ -35,6 +37,10 @@ public class TabFragmentSkill extends BaseTabItemFragment {
 
 	@Override
 	protected void initViews() {
+		topbar = (Topbar) findViewById(R.id.topbar);
+		topbar.setTitle(R.string.skill_simulator);
 
+		Map<String, List<DiabloSkillModel>> skills = SkillManager.getInstance(getActivity()).loadSkills();
+		NLog.d(getClass(), skills);
 	}
 }

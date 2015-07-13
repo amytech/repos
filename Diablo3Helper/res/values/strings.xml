@@ -16,4 +16,10 @@
     <string name="tab_level">天梯</string>
     <string name="tab_more">更多</string>
 
+    <!-- TabFragmentSkill -->
+    <string name="skill_simulator">技能模拟器</string>
+    <string name="mouse_skill">鼠标技能</string>
+    <string name="actionbar_skill">动作条技能</string>
+    <string name="passive_skill">被动技能</string>
+
 </resources>
