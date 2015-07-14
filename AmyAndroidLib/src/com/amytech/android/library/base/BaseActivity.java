@@ -1,5 +1,7 @@
 package com.amytech.android.library.base;
 
+import com.amytech.android.library.utils.SPUtils;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -25,6 +27,8 @@ public abstract class BaseActivity extends FragmentActivity {
 	protected String TAG = getClass().getSimpleName();
 
 	protected LayoutInflater layoutInflater;
+
+	protected SPUtils spUtils;
 
 	public void startActivity(Class<? extends BaseActivity> activityClass) {
 		Intent intent = new Intent(this, activityClass);
@@ -54,6 +58,8 @@ public abstract class BaseActivity extends FragmentActivity {
 		setContentView(getLayoutID());
 
 		layoutInflater = LayoutInflater.from(this);
+
+		spUtils = new SPUtils(getPackageName());
 
 		initViews();
 	}

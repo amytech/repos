@@ -1,5 +1,7 @@
 package com.amytech.android.library.base;
 
+import com.amytech.android.library.utils.SPUtils;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -19,6 +21,8 @@ import android.widget.Toast;
  */
 public abstract class BaseFragment extends Fragment {
 	protected String TAG = getClass().getSimpleName();
+
+	protected SPUtils spUtils;
 
 	protected abstract int getLayoutID();
 
@@ -51,6 +55,12 @@ public abstract class BaseFragment extends Fragment {
 
 	protected void showToast(int messageRes) {
 		Toast.makeText(getActivity(), messageRes, Toast.LENGTH_SHORT).show();
+	}
+
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		spUtils = new SPUtils(getActivity().getPackageName());
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package com.amytech.diablo3helper.view;
 
 import java.text.MessageFormat;
+import java.util.Properties;
 
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.amytech.android.library.base.BaseActivity;
 import com.amytech.android.library.utils.AppUtils;
+import com.amytech.android.library.utils.FileUtils;
 import com.amytech.android.library.utils.download.DownloadRequest;
 import com.amytech.android.library.utils.download.DownloadStatusListener;
 import com.amytech.android.library.utils.download.ThinDownloadManager;
@@ -18,9 +20,13 @@ import com.amytech.diablo3helper.manager.Constants;
 
 public class SplashActivity extends BaseActivity implements DownloadStatusListener {
 
-	private int downloadID = -1;
+	private DownloadRequest confFileRequest;
+	private int confFileRequestID;
 
-	private DownloadRequest downloadRequest;
+	private DownloadRequest dbFileRequest;
+	private int dbFileRequestID;
+
+	private int serverDBVersion;
 
 	private Button enterButton;
 
@@ -43,55 +49,93 @@ public class SplashActivity extends BaseActivity implements DownloadStatusListen
 		progressView = (ProgressBar) findViewById(R.id.splash_progress);
 		progressView.setVisibility(View.VISIBLE);
 
-		if (Constants.DB_FILE_SKILL.exists()) {
-			onDownloadComplete(0);
-		} else {
-			downloader = new ThinDownloadManager();
-			downloadRequest = new DownloadRequest(Constants.URL_SKILL_DB_FILE);
-			downloadRequest.setDownloadListener(this);
-			downloadRequest.setDestinationFile(Constants.DB_FILE_SKILL);
-			downloadID = downloader.add(downloadRequest);
-		}
+		downloader = new ThinDownloadManager();
+		confFileRequest = new DownloadRequest(Constants.URL_CONF_FILE);
+		confFileRequest.setDownloadListener(this);
+		confFileRequest.setDestinationFile(Constants.CONF_FILE);
+		confFileRequestID = downloader.add(confFileRequest);
+
+		dbFileRequest = new DownloadRequest(Constants.URL_SKILL_DB_FILE);
+		dbFileRequest.setDownloadListener(this);
+		dbFileRequest.setDestinationFile(Constants.DB_FILE_SKILL);
 	}
 
 	@Override
 	public void onBackPressed() {
-		if (downloadID > 0) {
-			downloader.cancel(downloadID);
+		if (confFileRequestID > 0) {
+			downloader.cancel(confFileRequestID);
+		}
+
+		if (dbFileRequestID > 0) {
+			downloader.cancel(dbFileRequestID);
 		}
 		AppUtils.exit();
 	}
 
 	@Override
 	public void onDownloadComplete(int id) {
-		progressView.setVisibility(View.GONE);
-		progressText.setText(R.string.please_enter);
-		enterButton.setVisibility(View.VISIBLE);
-		enterButton.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				startActivity(HomeActivity.class);
-				finish();
+		if (id == confFileRequestID) {
+
+			Properties conf = FileUtils.readFileToProp(Constants.CONF_FILE);
+
+			serverDBVersion = Integer.parseInt(conf.getProperty(Constants.SP.SKILL_DB_VERSION));
+			int localDBVersion = spUtils.getInt(Constants.SP.SKILL_DB_VERSION, 0);
+			if (serverDBVersion > localDBVersion) {
+				dbFileRequestID = downloader.add(dbFileRequest);
+			} else {
+				showNormalEnter();
 			}
-		});
+		}
+
+		if (id == dbFileRequestID) {
+			showNormalEnter();
+			spUtils.putInt(Constants.SP.SKILL_DB_VERSION, serverDBVersion);
+		}
 	}
 
 	@Override
 	public void onDownloadFailed(int id, int errorCode, String errorMessage) {
-		progressView.setVisibility(View.GONE);
-		progressText.setText(R.string.download_error);
-
-		enterButton.setVisibility(View.VISIBLE);
-		enterButton.setText(R.string.retry);
-		enterButton.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				downloadID = downloader.add(downloadRequest);
-			}
-		});
+		showErrorEnter();
 	}
 
 	@Override
 	public void onProgress(int id, long totalBytes, long downloadedBytes, int progress) {
+		if (id == dbFileRequestID) {
+			updateProgress(progress, totalBytes, downloadedBytes);
+		}
+	}
+
+	private void updateProgress(int progress, long totalBytes, long downloadedBytes) {
+		enterButton.setVisibility(View.GONE);
 		progressText.setText(MessageFormat.format(getString(R.string.update_offline_data), downloadedBytes, totalBytes));
+		progressView.setVisibility(View.VISIBLE);
 		progressView.setProgress(progress);
+		enterButton.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				startActivity(HomeActivity.class);
+			}
+		});
+	}
+
+	private void showErrorEnter() {
+		enterButton.setVisibility(View.VISIBLE);
+		progressText.setText(R.string.server_error);
+		progressView.setVisibility(View.GONE);
+		enterButton.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				startActivity(HomeActivity.class);
+			}
+		});
+	}
+
+	private void showNormalEnter() {
+		enterButton.setVisibility(View.VISIBLE);
+		progressText.setText(R.string.please_enter);
+		progressView.setVisibility(View.GONE);
+		enterButton.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				startActivity(HomeActivity.class);
+			}
+		});
 	}
 }

@@ -8,6 +8,7 @@
     <string name="connect_server">正在连接服务器</string>
     <string name="update_offline_data">更新离线数据: {0}/{1}</string>
     <string name="please_enter">点击进入享受暗黑的世界</string>
+    <string name="server_error">服务器连接失败，将进入离线查看模式</string>
 
     <!-- HomeActivity -->
     <string name="tab_info">资讯</string>

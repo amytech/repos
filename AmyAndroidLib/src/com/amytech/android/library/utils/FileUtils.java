@@ -15,6 +15,7 @@ import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import com.amytech.android.library.base.BaseApplication;
 
@@ -334,6 +335,30 @@ public class FileUtils {
 			throw new RuntimeException("FileNotFoundException occurred. ", e);
 		}
 		return writeFile(destFilePath, inputStream);
+	}
+
+	public static Properties readFileToProp(File file) {
+		if (file == null || !file.isFile()) {
+			return null;
+		}
+
+		InputStream is = null;
+		try {
+			is = new FileInputStream(file);
+			Properties p = new Properties();
+			p.load(is);
+			return p;
+		} catch (IOException e) {
+			throw new RuntimeException("IOException occurred. ", e);
+		} finally {
+			if (is != null) {
+				try {
+					is.close();
+				} catch (IOException e) {
+					throw new RuntimeException("IOException occurred. ", e);
+				}
+			}
+		}
 	}
 
 	/**

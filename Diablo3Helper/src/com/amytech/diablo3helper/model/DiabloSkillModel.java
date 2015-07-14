@@ -14,6 +14,7 @@ public class DiabloSkillModel {
 
 	public String skillAlias = "";
 	public String jobName = "";
+	public int skillType = 0;
 	public String skillName = "";
 	public String skillDesc = "";
 	public String skillIcon = "";
@@ -22,10 +23,11 @@ public class DiabloSkillModel {
 		super();
 	}
 
-	public DiabloSkillModel(String skillAlias, String jobName, String skillName, String skillDesc, String skillIcon) {
+	public DiabloSkillModel(String skillAlias, String jobName, int skillType, String skillName, String skillDesc, String skillIcon) {
 		super();
 		this.skillAlias = skillAlias;
 		this.jobName = jobName;
+		this.skillType = skillType;
 		this.skillName = skillName;
 		this.skillDesc = skillDesc;
 		this.skillIcon = skillIcon;
