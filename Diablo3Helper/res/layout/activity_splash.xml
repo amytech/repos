@@ -4,44 +4,25 @@
     android:layout_height="match_parent"
     android:background="@drawable/splash" >
 
-    <LinearLayout
-        android:id="@+id/progress_layout"
+    <TextView
+        android:id="@+id/progress_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
         android:background="@android:color/black"
-        android:orientation="vertical"
+        android:gravity="center_horizontal"
         android:paddingBottom="5dp"
-        android:paddingTop="5dp" >
-
-        <TextView
-            android:id="@+id/progress_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:gravity="center_horizontal"
-            android:text="@string/connect_server"
-            android:textColor="@color/color_base_subtitle"
-            android:textSize="14sp" />
-
-        <ProgressBar
-            android:id="@+id/splash_progress"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
-            android:indeterminateDrawable="@drawable/progress_bg"
-            android:max="100"
-            android:progress="0"
-            android:visibility="gone" />
-    </LinearLayout>
+        android:paddingTop="5dp"
+        android:text="@string/init_offline_data"
+        android:textColor="@color/color_base_subtitle"
+        android:textSize="14sp" />
 
     <Button
         android:id="@+id/splash_enter_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/progress_layout"
+        android:layout_above="@+id/progress_text"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:background="@drawable/selector_button"

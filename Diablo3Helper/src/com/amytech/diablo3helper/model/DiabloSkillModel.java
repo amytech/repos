@@ -23,6 +23,12 @@ public class DiabloSkillModel {
 		super();
 	}
 
+	public DiabloSkillModel(String jobName, String skillName) {
+		super();
+		this.jobName = jobName;
+		this.skillName = skillName;
+	}
+
 	public DiabloSkillModel(String skillAlias, String jobName, int skillType, String skillName, String skillDesc, String skillIcon) {
 		super();
 		this.skillAlias = skillAlias;
@@ -36,5 +42,14 @@ public class DiabloSkillModel {
 	@Override
 	public String toString() {
 		return skillName;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o != null && o instanceof DiabloSkillModel) {
+			return ((DiabloSkillModel) o).jobName.equals(jobName) && ((DiabloSkillModel) o).skillName.equals(skillName);
+		} else {
+			return false;
+		}
 	}
 }
