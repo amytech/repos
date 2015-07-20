@@ -51,10 +51,8 @@ public class DiabloInfoManager extends BaseManager {
 		void onLoadInfoFailure(String errorMessage);
 	}
 
-	private static final String INFO_URL = "http://d3.178.com/list/225921464949{0}.html";
-
 	public void reloadInfo(final ReloadInfoCallback callback) {
-		String url = MessageFormat.format(INFO_URL, "");
+		String url = MessageFormat.format(spUtils.getString(Constants.SP_INFO_URL, Constants.URL_DEFAULT_INFO), "");
 		CLIENT.get(url, new TextHttpResponseHandler("UTF-8") {
 
 			@Override
@@ -78,7 +76,7 @@ public class DiabloInfoManager extends BaseManager {
 	 * 获取资讯消息
 	 */
 	public void loadInfo(final int page, final LoadInfoCallback callback) {
-		String url = MessageFormat.format(INFO_URL, page == 1 ? "" : "_" + page);
+		String url = MessageFormat.format(spUtils.getString(Constants.SP_INFO_URL, Constants.URL_DEFAULT_INFO), page == 1 ? "" : "_" + page);
 		CLIENT.get(url, new TextHttpResponseHandler("UTF-8") {
 
 			@Override

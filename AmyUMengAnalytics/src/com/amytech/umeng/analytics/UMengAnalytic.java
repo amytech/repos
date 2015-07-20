@@ -6,7 +6,8 @@ import android.content.Context;
 
 import com.umeng.analytics.AnalyticsConfig;
 import com.umeng.analytics.MobclickAgent;
-import com.umeng.analytics.onlineconfig.UmengOnlineConfigureListener;
+import com.umeng.onlineconfig.OnlineConfigAgent;
+import com.umeng.onlineconfig.UmengOnlineConfigureListener;
 
 /**
  * Title: AmyUMengAnalytics <br>
@@ -20,20 +21,23 @@ import com.umeng.analytics.onlineconfig.UmengOnlineConfigureListener;
  */
 public class UMengAnalytic {
 
+	public static final String CHANNEL_DEFAULT = "DEFAULT";
 	public static final String CHANNEL_QQ = "QQ";
 	public static final String CHANNEL_BAIDU = "Baidu";
 	public static final String CHANNEL_91 = "91";
 	public static final String CHANNEL_ANZHI = "AnZhi";
 
 	public static void init(Context context, String appKey, String channel, UmengOnlineConfigureListener listener) {
-		MobclickAgent.openActivityDurationTrack(false);
-		MobclickAgent.updateOnlineConfig(context);
-		if (listener != null) {
-			MobclickAgent.setOnlineConfigureListener(listener);
-		}
+		AnalyticsConfig.setAppkey(appKey);
 		AnalyticsConfig.enableEncrypt(true);
 		AnalyticsConfig.setChannel(channel);
-		AnalyticsConfig.setAppkey(appKey);
+
+		MobclickAgent.setDebugMode(true);
+		MobclickAgent.openActivityDurationTrack(false);
+
+		OnlineConfigAgent.getInstance().setDebugMode(true);
+		OnlineConfigAgent.getInstance().setOnlineConfigListener(listener);
+		OnlineConfigAgent.getInstance().updateOnlineConfig(context);
 	}
 
 	public static void onEvent(Context context, String event) {
@@ -58,5 +62,9 @@ public class UMengAnalytic {
 
 	public static void onKillProcess(Context context) {
 		MobclickAgent.onKillProcess(context);
+	}
+
+	public static String getConfig(Context context, String key) {
+		return OnlineConfigAgent.getInstance().getConfigParams(context, key);
 	}
 }

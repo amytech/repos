@@ -15,6 +15,7 @@ import com.umeng.analytics.MobclickAgent;
  * @author marktlzhai
  */
 public class UMengBaseFragment extends Fragment {
+	@Override
 	public void onResume() {
 		super.onResume();
 		MobclickAgent.onPageStart(getClass().getSimpleName());

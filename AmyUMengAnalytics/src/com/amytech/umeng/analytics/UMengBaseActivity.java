@@ -15,12 +15,14 @@ import com.umeng.analytics.MobclickAgent;
  * @author marktlzhai
  */
 public class UMengBaseActivity extends FragmentActivity {
-	public void onResume() {
+	@Override
+	protected void onResume() {
 		super.onResume();
 		MobclickAgent.onResume(this);
 	}
 
-	public void onPause() {
+	@Override
+	protected void onPause() {
 		super.onPause();
 		MobclickAgent.onPause(this);
 	}

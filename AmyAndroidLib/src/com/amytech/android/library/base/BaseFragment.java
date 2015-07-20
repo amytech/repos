@@ -1,13 +1,13 @@
 package com.amytech.android.library.base;
 
-import com.amytech.android.library.utils.SPUtils;
-
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import com.amytech.android.library.utils.SPUtils;
+import com.amytech.umeng.analytics.UMengBaseFragment;
 
 /**
  * Title: AmyAndroidLib <br>
@@ -19,7 +19,7 @@ import android.widget.Toast;
  *
  * @author marktlzhai
  */
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends UMengBaseFragment {
 	protected String TAG = getClass().getSimpleName();
 
 	protected SPUtils spUtils;

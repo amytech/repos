@@ -16,7 +16,8 @@
         android:paddingTop="5dp"
         android:text="@string/init_offline_data"
         android:textColor="@color/color_base_subtitle"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/splash_enter_btn"

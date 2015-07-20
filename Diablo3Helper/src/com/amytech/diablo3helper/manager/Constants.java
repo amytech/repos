@@ -19,5 +19,7 @@ public class Constants {
 	public static final File PATH_FILE = DiabloApplication.getInstance().getFilesDir();
 	public static final File PATH_CACHE = DiabloApplication.getInstance().getCacheDir();
 
-	public static final File FILE_SKILL_DB = new File(PATH_FILE, "skill.db");
+	public static final String URL_DEFAULT_INFO = "http://d3.178.com/list/225921464949{0}.html";
+
+	public static final String SP_INFO_URL = "DIABLO_INFO_URL";
 }

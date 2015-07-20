@@ -1,12 +1,12 @@
 package com.amytech.android.library.base;
 
-import com.amytech.android.library.utils.SPUtils;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.widget.Toast;
+
+import com.amytech.android.library.utils.SPUtils;
+import com.amytech.umeng.analytics.UMengBaseActivity;
 
 /**
  * Title: AmyAndroidLib <br>
@@ -18,7 +18,7 @@ import android.widget.Toast;
  *
  * @author marktlzhai
  */
-public abstract class BaseActivity extends FragmentActivity {
+public abstract class BaseActivity extends UMengBaseActivity {
 
 	protected abstract int getLayoutID();
 

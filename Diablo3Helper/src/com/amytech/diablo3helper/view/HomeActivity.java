@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.amytech.android.library.base.extras.BaseTabActivity;
+import com.amytech.android.library.utils.AppUtils;
 import com.amytech.diablo3helper.R;
 import com.amytech.diablo3helper.view.info.TabFragmentInfo;
 import com.amytech.diablo3helper.view.items.TabFragmentItems;
@@ -64,5 +65,10 @@ public class HomeActivity extends BaseTabActivity {
 	@Override
 	protected int getTabWidgetSelector() {
 		return R.drawable.selector_tab_background;
+	}
+
+	@Override
+	public void onBackPressed() {
+		AppUtils.exit(this);
 	}
 }

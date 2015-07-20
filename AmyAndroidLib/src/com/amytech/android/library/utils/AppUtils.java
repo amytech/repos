@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.os.Process;
 
 import com.amytech.android.library.base.BaseApplication;
+import com.amytech.umeng.analytics.UMengAnalytic;
 
 /**
  * Title: AmyAndroidLib <br>
@@ -29,8 +30,9 @@ import com.amytech.android.library.base.BaseApplication;
  */
 public class AppUtils {
 
-	public static void exit() {
+	public static void exit(Context context) {
 		NLog.d("Application will exit.");
+		UMengAnalytic.onKillProcess(context);
 		System.exit(0);
 		Process.killProcess(Process.myPid());
 	}

@@ -2,6 +2,7 @@ package com.amytech.android.library.base;
 
 import android.content.Context;
 
+import com.amytech.android.library.utils.SPUtils;
 import com.amytech.android.library.utils.asynchttp.AsyncHttpClient;
 
 /**
@@ -19,9 +20,12 @@ public class BaseManager {
 
 	protected Context context;
 
+	protected SPUtils spUtils;
+
 	public BaseManager(Context context) {
 		this.context = context;
 
 		CLIENT.setUserAgent("Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36");
+		spUtils = new SPUtils(BaseApplication.getInstance().getPackageName());
 	}
 }

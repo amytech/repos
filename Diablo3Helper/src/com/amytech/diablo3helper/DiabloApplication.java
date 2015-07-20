@@ -21,7 +21,7 @@ public class DiabloApplication extends BaseApplication {
 		super.onCreate();
 
 		ImageUtils.init(this);
-		
+
 		SkillManager.getInstance(this);
 	}
 }
