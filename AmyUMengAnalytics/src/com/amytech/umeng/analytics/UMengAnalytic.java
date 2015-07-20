@@ -1,4 +1,13 @@
 package com.amytech.umeng.analytics;
+
+import java.util.Map;
+
+import android.content.Context;
+
+import com.umeng.analytics.AnalyticsConfig;
+import com.umeng.analytics.MobclickAgent;
+import com.umeng.analytics.onlineconfig.UmengOnlineConfigureListener;
+
 /**
  * Title: AmyUMengAnalytics <br>
  * Description: <br>
@@ -11,4 +20,43 @@ package com.amytech.umeng.analytics;
  */
 public class UMengAnalytic {
 
+	public static final String CHANNEL_QQ = "QQ";
+	public static final String CHANNEL_BAIDU = "Baidu";
+	public static final String CHANNEL_91 = "91";
+	public static final String CHANNEL_ANZHI = "AnZhi";
+
+	public static void init(Context context, String appKey, String channel, UmengOnlineConfigureListener listener) {
+		MobclickAgent.openActivityDurationTrack(false);
+		MobclickAgent.updateOnlineConfig(context);
+		if (listener != null) {
+			MobclickAgent.setOnlineConfigureListener(listener);
+		}
+		AnalyticsConfig.enableEncrypt(true);
+		AnalyticsConfig.setChannel(channel);
+		AnalyticsConfig.setAppkey(appKey);
+	}
+
+	public static void onEvent(Context context, String event) {
+		MobclickAgent.onEvent(context, event);
+	}
+
+	public static void onEvent(Context context, String event, Map<String, String> data) {
+		MobclickAgent.onEvent(context, event, data);
+	}
+
+	public static void onEventValue(Context context, String event, Map<String, String> data, int duration) {
+		MobclickAgent.onEventValue(context, event, data, duration);
+	}
+
+	public static void onError(Context context, String error) {
+		MobclickAgent.reportError(context, error);
+	}
+
+	public static void onError(Context context, Throwable t) {
+		MobclickAgent.reportError(context, t);
+	}
+
+	public static void onKillProcess(Context context) {
+		MobclickAgent.onKillProcess(context);
+	}
 }
