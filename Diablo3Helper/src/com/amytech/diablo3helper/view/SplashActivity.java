@@ -45,8 +45,12 @@ public class SplashActivity extends BaseActivity {
 				enableEnter();
 			}
 		});
-		
-		handle
+
+		handler.postDelayed(new Runnable() {
+			public void run() {
+				enableEnter();
+			}
+		}, 2000);
 	}
 
 	private void enableEnter() {

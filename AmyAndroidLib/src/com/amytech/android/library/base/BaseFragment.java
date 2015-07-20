@@ -1,6 +1,7 @@
 package com.amytech.android.library.base;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,8 @@ public abstract class BaseFragment extends UMengBaseFragment {
 	}
 
 	protected View rootView;
+
+	protected Handler handler = new Handler();
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

@@ -2,6 +2,7 @@ package com.amytech.android.library.base;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.widget.Toast;
 
@@ -29,6 +30,8 @@ public abstract class BaseActivity extends UMengBaseActivity {
 	protected LayoutInflater layoutInflater;
 
 	protected SPUtils spUtils;
+
+	protected Handler handler = new Handler();
 
 	public void startActivity(Class<? extends BaseActivity> activityClass) {
 		Intent intent = new Intent(this, activityClass);
