@@ -2,6 +2,7 @@ package com.amytech.diablo3helper;
 
 import com.amytech.android.library.base.BaseApplication;
 import com.amytech.android.library.utils.ImageUtils;
+import com.amytech.diablo3helper.manager.SkillManager;
 
 /**
  * Title: Diablo3Helper <br>
@@ -20,5 +21,7 @@ public class DiabloApplication extends BaseApplication {
 		super.onCreate();
 
 		ImageUtils.init(this);
+		
+		SkillManager.getInstance(this);
 	}
 }

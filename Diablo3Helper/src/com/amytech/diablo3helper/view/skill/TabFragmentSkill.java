@@ -45,6 +45,8 @@ public class TabFragmentSkill extends BaseTabItemFragment {
 	private ImageView passiveSkill3;
 	private ImageView passiveSkill4;
 
+	private OnSkillClickListener skillClickListener;
+
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -57,8 +59,6 @@ public class TabFragmentSkill extends BaseTabItemFragment {
 
 	@Override
 	protected void initViews() {
-		Map<String, List<DiabloSkillModel>> skills = SkillManager.getInstance(getActivity()).loadSkills();
-
 		topbar = (Topbar) findViewById(R.id.topbar);
 		topbar.setTitle(R.string.skill_simulator);
 		topbar.configRightImgBtn(TopbarIcon.SHARE, new OnClickListener() {
@@ -68,10 +68,10 @@ public class TabFragmentSkill extends BaseTabItemFragment {
 		});
 
 		checkJobSpinner = (Spinner) findViewById(R.id.skill_check_job_spinner);
-		ArrayAdapter<? extends Object> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item,
-				CollectionUtils.toList(skills.keySet()));
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		checkJobSpinner.setAdapter(adapter);
+//		ArrayAdapter<? extends Object> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, CollectionUtils.toList(SkillManager
+//				.getSkillData().keySet()));
+		// adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		// checkJobSpinner.setAdapter(adapter);
 
 		skillItem1 = (SkillItemView) findViewById(R.id.skill_item1);
 		skillItem2 = (SkillItemView) findViewById(R.id.skill_item2);
@@ -84,5 +84,22 @@ public class TabFragmentSkill extends BaseTabItemFragment {
 		passiveSkill2 = (ImageView) findViewById(R.id.passive_skill2);
 		passiveSkill3 = (ImageView) findViewById(R.id.passive_skill3);
 		passiveSkill4 = (ImageView) findViewById(R.id.passive_skill4);
+
+		skillClickListener = new OnSkillClickListener();
+		skillItem1.setOnClickListener(skillClickListener);
+		skillItem2.setOnClickListener(skillClickListener);
+		skillItem3.setOnClickListener(skillClickListener);
+		skillItem4.setOnClickListener(skillClickListener);
+		skillItem5.setOnClickListener(skillClickListener);
+		skillItem6.setOnClickListener(skillClickListener);
+	}
+
+	private class OnSkillClickListener implements OnClickListener {
+		@Override
+		public void onClick(View v) {
+//			SkillPickerDialog dialog = new SkillPickerDialog(getActivity(), (SkillItemView) v, SkillManager.getSkillData().get(
+//					checkJobSpinner.getSelectedItem().toString()));
+//			dialog.show();
+		}
 	}
 }

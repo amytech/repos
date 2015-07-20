@@ -27,7 +27,7 @@ public class Topbar extends RelativeLayout {
 		// 无
 		NONE(0),
 		// 返回
-		BACK(R.drawable.icon_back),
+		BACK(R.drawable.icon_arrow_left),
 		// 设置
 		SETTINGS(R.drawable.icon_settings),
 		// 分享

@@ -15,7 +15,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public abstract class BaseDBOpenHelper extends SQLiteOpenHelper {
 
-	public BaseDBOpenHelper(Context context, int version, String dbName) {
+	public BaseDBOpenHelper(Context context, String dbName, int version) {
 		super(context, dbName, null, version);
 	}
 }
