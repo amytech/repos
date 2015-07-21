@@ -1,5 +1,7 @@
 package com.amytech.android.library.base;
 
+import com.amytech.android.library.utils.SPUtils;
+
 import android.app.Application;
 import android.util.DisplayMetrics;
 
@@ -37,12 +39,16 @@ public class BaseApplication extends Application {
 	 */
 	public static int DENSITY_DPI;
 
+	protected SPUtils spUtils;
+	
 	@Override
 	public void onCreate() {
 		super.onCreate();
 
 		instance = this;
 
+		spUtils = new SPUtils(getPackageName());
+		
 		// 初始化屏幕参数
 		initDisplay();
 	}

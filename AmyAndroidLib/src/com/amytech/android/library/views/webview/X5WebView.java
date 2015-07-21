@@ -99,6 +99,15 @@ public class X5WebView extends RelativeLayout implements LoadingInterface {
 		}
 	}
 
+	public void startLoadData(String html, String encoding) {
+		if (!TextUtils.isEmpty(html)) {
+			if (listener != null) {
+				listener.onWebPageLoading();
+			}
+			x5Webview.loadData(html, "", encoding);
+		}
+	}
+
 	@SuppressLint("SetJavaScriptEnabled")
 	private void initWebview() {
 		WebSettings settings = x5Webview.getSettings();

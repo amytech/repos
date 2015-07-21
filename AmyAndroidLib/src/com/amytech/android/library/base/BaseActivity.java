@@ -1,5 +1,6 @@
 package com.amytech.android.library.base;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.widget.Toast;
 
 import com.amytech.android.library.utils.SPUtils;
+import com.amytech.android.library.utils.UIUtils;
 import com.amytech.umeng.analytics.UMengBaseActivity;
 
 /**
@@ -32,6 +34,8 @@ public abstract class BaseActivity extends UMengBaseActivity {
 	protected SPUtils spUtils;
 
 	protected Handler handler = new Handler();
+
+	private Dialog loadingDialog;
 
 	public void startActivity(Class<? extends BaseActivity> activityClass) {
 		Intent intent = new Intent(this, activityClass);
@@ -73,6 +77,20 @@ public abstract class BaseActivity extends UMengBaseActivity {
 
 	protected void showToast(int messageRes) {
 		Toast.makeText(this, messageRes, Toast.LENGTH_SHORT).show();
+	}
+
+	protected void showLoadingDialog(int messageRes, boolean cancelable) {
+		loadingDialog = UIUtils.showProgressDialogTips(this, messageRes, cancelable);
+	}
+
+	protected void showLoadingDialog(String message, boolean cancelable) {
+		loadingDialog = UIUtils.showProgressDialogTips(this, message, cancelable);
+	}
+
+	protected void hideLoadingDialog() {
+		if (loadingDialog != null && loadingDialog.isShowing()) {
+			loadingDialog.dismiss();
+		}
 	}
 
 	@Override

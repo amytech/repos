@@ -6,8 +6,6 @@ import android.content.Context;
 
 import com.umeng.analytics.AnalyticsConfig;
 import com.umeng.analytics.MobclickAgent;
-import com.umeng.onlineconfig.OnlineConfigAgent;
-import com.umeng.onlineconfig.UmengOnlineConfigureListener;
 
 /**
  * Title: AmyUMengAnalytics <br>
@@ -27,17 +25,13 @@ public class UMengAnalytic {
 	public static final String CHANNEL_91 = "91";
 	public static final String CHANNEL_ANZHI = "AnZhi";
 
-	public static void init(Context context, String appKey, String channel, UmengOnlineConfigureListener listener) {
+	public static void init(Context context, String appKey, String channel) {
 		AnalyticsConfig.setAppkey(appKey);
 		AnalyticsConfig.enableEncrypt(true);
 		AnalyticsConfig.setChannel(channel);
 
 		MobclickAgent.setDebugMode(true);
 		MobclickAgent.openActivityDurationTrack(false);
-
-		OnlineConfigAgent.getInstance().setDebugMode(true);
-		OnlineConfigAgent.getInstance().setOnlineConfigListener(listener);
-		OnlineConfigAgent.getInstance().updateOnlineConfig(context);
 	}
 
 	public static void onEvent(Context context, String event) {
@@ -62,9 +56,5 @@ public class UMengAnalytic {
 
 	public static void onKillProcess(Context context) {
 		MobclickAgent.onKillProcess(context);
-	}
-
-	public static String getConfig(Context context, String key) {
-		return OnlineConfigAgent.getInstance().getConfigParams(context, key);
 	}
 }
