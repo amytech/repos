@@ -3,4 +3,10 @@
 
     <string name="app_name">乱看</string>
 
+    <!-- SplashActivity -->
+    <string name="login_to_more">登录体验更多功能</string>
+    <string name="no_login_enter">随便看看</string>
+    <string name="login_qq">QQ登录</string>
+    <string name="login_wx">微信登录</string>
+
 </resources>
