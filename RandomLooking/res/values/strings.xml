@@ -4,9 +4,17 @@
     <string name="app_name">乱看</string>
 
     <!-- SplashActivity -->
+    <string name="login_auto">正在自动登录，请稍后</string>
     <string name="login_to_more">登录体验更多功能</string>
     <string name="no_login_enter">随便看看</string>
     <string name="login_qq">QQ登录</string>
     <string name="login_wx">微信登录</string>
+
+    <!-- HomeActivity -->
+    <string name="tab_girl">美女图片</string>
+    <string name="tab_weixin">微信精选</string>
+    <string name="tab_joy">娱乐花边</string>
+    <string name="tab_funny">奇闻趣事</string>
+    <string name="tab_social">社会新闻</string>
 
 </resources>

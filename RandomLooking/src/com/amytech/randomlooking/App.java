@@ -1,6 +1,7 @@
 package com.amytech.randomlooking;
 
 import com.amytech.android.library.base.BaseApplication;
+import com.amytech.android.library.utils.ImageUtils;
 import com.amytech.umeng.analytics.UMengAnalytic;
 
 /**
@@ -24,6 +25,9 @@ public class App extends BaseApplication {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		
+		ImageUtils.init(this);
+		
 		UMengAnalytic.init(this, "55b056ef67e58eb80500705b", UMengAnalytic.CHANNEL_DEFAULT);
 	}
 }
