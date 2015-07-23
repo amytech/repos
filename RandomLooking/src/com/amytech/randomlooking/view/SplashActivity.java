@@ -31,6 +31,7 @@ public class SplashActivity extends BaseActivity {
 		noLoginButton.setOnClickListener(btnListener);
 		loginQQButton.setOnClickListener(btnListener);
 		loginWXButton.setOnClickListener(btnListener);
+
 	}
 
 	@Override
@@ -57,11 +58,9 @@ public class SplashActivity extends BaseActivity {
 		}
 
 		private void enterWX() {
-
 		}
 
 		private void enterQQ() {
-
 		}
 
 		private void enter() {
