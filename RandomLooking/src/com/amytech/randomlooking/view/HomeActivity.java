@@ -2,11 +2,10 @@ package com.amytech.randomlooking.view;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
-
 import com.amytech.android.library.base.extras.BaseTabActivity;
 import com.amytech.android.library.utils.AppUtils;
 import com.amytech.randomlooking.R;
@@ -27,6 +26,7 @@ import com.amytech.umeng.analytics.UMengAnalytic;
  *
  * @author marktlzhai
  */
+@SuppressLint("InflateParams")
 public class HomeActivity extends BaseTabActivity {
 
 	@Override

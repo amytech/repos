@@ -8,6 +8,7 @@ import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
@@ -46,6 +47,7 @@ public class ImageUtils {
 		builder = builder.cacheInMemory(true);
 		builder = builder.cacheOnDisk(true);
 		builder = builder.considerExifParams(true);
+		builder = builder.imageScaleType(ImageScaleType.NONE_SAFE);
 		builder = builder.displayer(new RoundedBitmapDisplayer(10));
 		return builder.build();
 	}
@@ -72,7 +74,8 @@ public class ImageUtils {
 		builder = builder.cacheInMemory(true);
 		builder = builder.cacheOnDisk(true);
 		builder = builder.considerExifParams(true);
-		builder = builder.displayer(new RoundedBitmapDisplayer(20));
+		builder = builder.imageScaleType(ImageScaleType.EXACTLY);
+		builder = builder.displayer(new RoundedBitmapDisplayer(10));
 		return builder.build();
 	}
 
