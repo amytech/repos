@@ -33,6 +33,6 @@ public class App extends BaseApplication {
 	public void onCreate() {
 		super.onCreate();
 
-		UMengAnalytic.init(this, "55b056ef67e58eb80500705b", UMengAnalytic.CHANNEL_DEFAULT);
+		UMengAnalytic.init(this, "55b056ef67e58eb80500705b", UMengAnalytic.CHANNEL_GOOGLE);
 	}
 }

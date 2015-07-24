@@ -24,6 +24,7 @@ public class UMengAnalytic {
 	public static final String CHANNEL_BAIDU = "Baidu";
 	public static final String CHANNEL_91 = "91";
 	public static final String CHANNEL_ANZHI = "AnZhi";
+	public static final String CHANNEL_GOOGLE = "Google";
 
 	public static void init(Context context, String appKey, String channel) {
 		AnalyticsConfig.setAppkey(appKey);
