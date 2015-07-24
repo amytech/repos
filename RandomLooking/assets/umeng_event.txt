@@ -1,0 +1,9 @@
+TAB_GIRL,切换到美女图片,0
+TAB_WX,切换到微信精选,0
+TAB_QIWEN,切换到奇闻趣事,0
+TAB_HUABIAN,切换到娱乐花边,0
+TAB_SOCIAL,切换到社会新闻,0
+SHARE_WX,分享到微信,0
+SHARE_WXF,分享到微信朋友圈,0
+SHARE_QQ,分享到QQ,0
+SHARE_SMS,分享到短信,0

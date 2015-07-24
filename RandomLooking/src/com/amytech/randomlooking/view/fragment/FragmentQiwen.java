@@ -33,6 +33,7 @@ import com.amytech.randomlooking.manager.QiwenManager;
 import com.amytech.randomlooking.manager.QiwenManager.QiwenGetCallback;
 import com.amytech.randomlooking.model.QiwenModel;
 import com.amytech.randomlooking.view.WebviewActivity;
+import com.amytech.umeng.analytics.UMengAnalytic;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
@@ -67,6 +68,12 @@ public class FragmentQiwen extends BaseTabItemFragment implements QiwenGetCallba
 		return R.layout.fragment_data;
 	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
+		UMengAnalytic.onEvent(App.getInstance(), App.UMeng.EVENT_TAB_QIWEN);
+	}
+	
 	@Override
 	protected void initViews() {
 		topbar = (Topbar) findViewById(R.id.topbar);
@@ -188,7 +195,8 @@ public class FragmentQiwen extends BaseTabItemFragment implements QiwenGetCallba
 					PickShareDialog shareDialog = new PickShareDialog(getActivity(), App.WX_APPID, App.QQ_APPID, new ShareCallback() {
 						@Override
 						public void shareqq() {
-							AmyQQ.getInstance(App.QQ_APPID).shareImage(getActivity(), item.getImageURL(), item.getTargetURL(), getString(R.string.app_name));
+							AmyQQ.getInstance(App.QQ_APPID).share(getActivity(), getString(R.string.app_share_title), item.getTitle(), item.getTargetURL(),
+									item.getImageURL(), getString(R.string.app_name));
 						}
 
 						@Override

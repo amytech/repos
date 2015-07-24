@@ -33,6 +33,7 @@ import com.amytech.randomlooking.manager.WXManager;
 import com.amytech.randomlooking.manager.WXManager.WXGetCallback;
 import com.amytech.randomlooking.model.WXModel;
 import com.amytech.randomlooking.view.WebviewActivity;
+import com.amytech.umeng.analytics.UMengAnalytic;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
@@ -68,9 +69,15 @@ public class FragmentWX extends BaseTabItemFragment implements WXGetCallback {
 	}
 
 	@Override
+	public void onResume() {
+		super.onResume();
+		UMengAnalytic.onEvent(App.getInstance(), App.UMeng.EVENT_TAB_WX);
+	}
+
+	@Override
 	protected void initViews() {
 		topbar = (Topbar) findViewById(R.id.topbar);
-		topbar.setTitle(R.string.tab_huabian);
+		topbar.setTitle(R.string.tab_weixin);
 
 		wxLoadingView = (TextView) findViewById(R.id.reload_text);
 		wxList = (PullToRefreshListView) findViewById(R.id.data_list);
@@ -169,7 +176,8 @@ public class FragmentWX extends BaseTabItemFragment implements WXGetCallback {
 					PickShareDialog shareDialog = new PickShareDialog(getActivity(), App.WX_APPID, App.QQ_APPID, new ShareCallback() {
 						@Override
 						public void shareqq() {
-							AmyQQ.getInstance(App.QQ_APPID).shareImage(getActivity(), item.getImageURL(), item.getTargetURL(), getString(R.string.app_name));
+							AmyQQ.getInstance(App.QQ_APPID).share(getActivity(), getString(R.string.app_share_title), item.getTitle(), item.getTargetURL(),
+									item.getImageURL(), getString(R.string.app_name));
 						}
 
 						@Override

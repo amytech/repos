@@ -15,6 +15,14 @@ import com.amytech.umeng.analytics.UMengAnalytic;
  */
 public class App extends BaseApplication {
 
+	public static final class UMeng {
+		public static final String EVENT_TAB_GIRL = "TAB_GIRL";
+		public static final String EVENT_TAB_WX = "TAB_WX";
+		public static final String EVENT_TAB_QIWEN = "TAB_QIWEN";
+		public static final String EVENT_TAB_HUABIAN = "TAB_HUABIAN";
+		public static final String EVENT_TAB_SOCIAL = "TAB_SOCIAL";
+	}
+
 	public static final String QQ_APPID = "1104707169";
 	public static final String QQ_APPKEY = "aS0CqPKcsj2wamSM";
 

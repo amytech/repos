@@ -78,8 +78,8 @@ public class WebviewActivity extends BaseWebViewActivity {
 			@Override
 			public void shareqq() {
 				if (item instanceof BaseItemModel) {
-					AmyQQ.getInstance(App.QQ_APPID).shareImage(WebviewActivity.this, ((BaseItemModel) item).getImageURL(),
-							((BaseItemModel) item).getTargetURL(), getString(R.string.app_name));
+					AmyQQ.getInstance(App.QQ_APPID).share(WebviewActivity.this, getString(R.string.app_share_title), ((BaseItemModel) item).getTitle(),
+							((BaseItemModel) item).getTargetURL(), ((BaseItemModel) item).getImageURL(), getString(R.string.app_name));
 				}
 			}
 

@@ -33,6 +33,7 @@ import com.amytech.randomlooking.manager.GirlManager;
 import com.amytech.randomlooking.manager.GirlManager.GirlGetCallback;
 import com.amytech.randomlooking.model.GirlModel;
 import com.amytech.randomlooking.view.WebviewActivity;
+import com.amytech.umeng.analytics.UMengAnalytic;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
@@ -65,6 +66,12 @@ public class FragmentGirl extends BaseTabItemFragment implements GirlGetCallback
 	@Override
 	protected int getLayoutID() {
 		return R.layout.fragment_data;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		UMengAnalytic.onEvent(App.getInstance(), App.UMeng.EVENT_TAB_GIRL);
 	}
 
 	@Override
@@ -188,7 +195,8 @@ public class FragmentGirl extends BaseTabItemFragment implements GirlGetCallback
 					PickShareDialog shareDialog = new PickShareDialog(getActivity(), App.WX_APPID, App.QQ_APPID, new ShareCallback() {
 						@Override
 						public void shareqq() {
-							AmyQQ.getInstance(App.QQ_APPID).shareImage(getActivity(), item.getImageURL(), item.getTargetURL(), getString(R.string.app_name));
+							AmyQQ.getInstance(App.QQ_APPID).share(getActivity(), getString(R.string.app_share_title), item.getTitle(), item.getTargetURL(),
+									item.getImageURL(), getString(R.string.app_name));
 						}
 
 						@Override

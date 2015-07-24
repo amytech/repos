@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 
 import com.amytech.android.library.base.BaseApplication;
+import com.amytech.umeng.analytics.UMengAnalytic;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.sdk.modelmsg.WXMediaMessage;
 import com.tencent.mm.sdk.modelmsg.WXWebpageObject;
@@ -60,6 +61,12 @@ public class AmyWX {
 		req.message = msg;
 		req.scene = timeline ? SendMessageToWX.Req.WXSceneTimeline : SendMessageToWX.Req.WXSceneSession;
 		weixin.sendReq(req);
+
+		if (timeline) {
+			UMengAnalytic.onEvent(BaseApplication.getInstance(), "SHARE_WXF");
+		} else {
+			UMengAnalytic.onEvent(BaseApplication.getInstance(), "SHARE_WX");
+		}
 	}
 
 	public static byte[] bmpToByteArray(final Bitmap bmp, final boolean needRecycle) {

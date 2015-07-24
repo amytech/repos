@@ -11,6 +11,7 @@ import com.amytech.android.library.share.model.QQGetInfoResponse;
 import com.amytech.android.library.share.model.QQLoginResponse;
 import com.amytech.android.library.utils.AppUtils;
 import com.amytech.android.library.utils.SPUtils;
+import com.amytech.umeng.analytics.UMengAnalytic;
 import com.tencent.connect.UserInfo;
 import com.tencent.connect.share.QQShare;
 import com.tencent.tauth.IUiListener;
@@ -28,6 +29,24 @@ import com.tencent.tauth.UiError;
  * @author marktlzhai
  */
 public class AmyQQ {
+
+	public class NothingTODOListener implements IUiListener {
+
+		@Override
+		public void onCancel() {
+
+		}
+
+		@Override
+		public void onComplete(Object arg0) {
+
+		}
+
+		@Override
+		public void onError(UiError arg0) {
+
+		}
+	}
 
 	public interface QQLoginInterface {
 		void qqLoginSuccess(QQLoginResponse response);
@@ -156,36 +175,20 @@ public class AmyQQ {
 		});
 	}
 
-	public void shareImage(Activity activity, String imageLocalURL, String targetURL, String appName) {
-		Bundle params = new Bundle();
-		params.putString(QQShare.SHARE_TO_QQ_IMAGE_LOCAL_URL, imageLocalURL);
-		params.putString(QQShare.SHARE_TO_QQ_APP_NAME, appName);
-		params.putString(QQShare.SHARE_TO_QQ_TARGET_URL, targetURL);
-		params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_IMAGE);
-		params.putInt(QQShare.SHARE_TO_QQ_EXT_INT, QQShare.SHARE_TO_QQ_FLAG_QZONE_AUTO_OPEN);
-		tencent.shareToQQ(activity, params, null);
-	}
+	/**
+	 * 分享到QQ
+	 */
+	public void share(Activity activity, String title, String summary, String targetURL, String iconUrl, String appName) {
+		Bundle bundle = new Bundle();
+		bundle.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_DEFAULT);
+		bundle.putString(QQShare.SHARE_TO_QQ_TITLE, title);
+		bundle.putString(QQShare.SHARE_TO_QQ_SUMMARY, summary);
+		bundle.putString(QQShare.SHARE_TO_QQ_TARGET_URL, targetURL);
+		bundle.putString(QQShare.SHARE_TO_QQ_IMAGE_URL, iconUrl);
+		bundle.putString(QQShare.SHARE_TO_QQ_APP_NAME, appName);
 
-	public void shareMusic(Activity activity, String title, String summary, String targetURL, String imageURL, String audioURL, String appName) {
-		final Bundle params = new Bundle();
-		params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_AUDIO);
-		params.putString(QQShare.SHARE_TO_QQ_TITLE, title);
-		params.putString(QQShare.SHARE_TO_QQ_SUMMARY, summary);
-		params.putString(QQShare.SHARE_TO_QQ_TARGET_URL, targetURL);
-		params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL, imageURL);
-		params.putString(QQShare.SHARE_TO_QQ_AUDIO_URL, audioURL);
-		params.putString(QQShare.SHARE_TO_QQ_APP_NAME, appName);
-		params.putInt(QQShare.SHARE_TO_QQ_EXT_INT, QQShare.SHARE_TO_QQ_FLAG_QZONE_AUTO_OPEN);
-		tencent.shareToQQ(activity, params, null);
-	}
+		tencent.shareToQQ(activity, bundle, new NothingTODOListener());
 
-	public void shareAPP(Activity activity, String title, String summary, String imageURL, String appName) {
-		final Bundle params = new Bundle();
-		params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_APP);
-		params.putString(QQShare.SHARE_TO_QQ_TITLE, title);
-		params.putString(QQShare.SHARE_TO_QQ_SUMMARY, summary);
-		params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL, imageURL);
-		params.putString(QQShare.SHARE_TO_QQ_APP_NAME, appName);
-		tencent.shareToQQ(activity, params, null);
+		UMengAnalytic.onEvent(activity, "SHARE_QQ");
 	}
 }
