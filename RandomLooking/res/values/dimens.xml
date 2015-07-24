@@ -1,3 +1,5 @@
 <resources>
 
+    <dimen name="girl_image_size">120dp</dimen>
+
 </resources>

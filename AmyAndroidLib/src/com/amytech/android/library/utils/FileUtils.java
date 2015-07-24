@@ -134,7 +134,7 @@ public class FileUtils {
 	 *            是否为增量
 	 * @return
 	 */
-	public static boolean writeFile(String filePath, List<String> contentList, boolean append) {
+	public static boolean writeFile(String filePath, List<? extends Object> contentList, boolean append) {
 		if (contentList == null) {
 			return false;
 		}
@@ -144,11 +144,11 @@ public class FileUtils {
 			makeDirs(filePath);
 			fileWriter = new FileWriter(filePath, append);
 			int i = 0;
-			for (String line : contentList) {
+			for (Object line : contentList) {
 				if (i++ > 0) {
 					fileWriter.write("\r\n");
 				}
-				fileWriter.write(line);
+				fileWriter.write(line.toString());
 			}
 			fileWriter.close();
 			return true;
@@ -246,7 +246,7 @@ public class FileUtils {
 	 * @param contentList
 	 * @return
 	 */
-	public static boolean writeFile(String filePath, List<String> contentList) {
+	public static boolean writeFile(String filePath, List<? extends Object> contentList) {
 		return writeFile(filePath, contentList, false);
 	}
 

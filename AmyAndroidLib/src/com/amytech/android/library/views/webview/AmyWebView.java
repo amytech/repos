@@ -5,25 +5,26 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
+import android.net.http.SslError;
 import android.os.Build;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.webkit.ConsoleMessage;
+import android.webkit.JsResult;
+import android.webkit.SslErrorHandler;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.RelativeLayout;
 
 import com.amytech.android.library.R;
 import com.amytech.android.library.base.BaseApplication;
+import com.amytech.android.library.utils.NLog;
 import com.amytech.android.library.views.LoadingView;
 import com.amytech.android.library.views.LoadingView.LoadingInterface;
-import com.tencent.smtt.export.external.interfaces.ConsoleMessage;
-import com.tencent.smtt.export.external.interfaces.JsResult;
-import com.tencent.smtt.export.external.interfaces.SslError;
-import com.tencent.smtt.export.external.interfaces.SslErrorHandler;
-import com.tencent.smtt.sdk.WebChromeClient;
-import com.tencent.smtt.sdk.WebSettings;
-import com.tencent.smtt.sdk.WebView;
-import com.tencent.smtt.sdk.WebViewClient;
 
 /**
  * Title: AmyAndroidLib <br>
@@ -35,7 +36,7 @@ import com.tencent.smtt.sdk.WebViewClient;
  *
  * @author marktlzhai
  */
-public class X5WebView extends RelativeLayout implements LoadingInterface {
+public class AmyWebView extends RelativeLayout implements LoadingInterface {
 
 	public static interface WebViewLoadListener {
 		public void onWebViewInited(WebView webView);
@@ -62,26 +63,26 @@ public class X5WebView extends RelativeLayout implements LoadingInterface {
 
 	private LoadingView loadingView;
 
-	public X5WebView(Context context) {
+	public AmyWebView(Context context) {
 		super(context);
 		initView();
 	}
 
-	public X5WebView(Context context, AttributeSet attrs) {
+	public AmyWebView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		initView();
 	}
 
-	public X5WebView(Context context, AttributeSet attrs, int defStyleAttr) {
+	public AmyWebView(Context context, AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 		initView();
 	}
 
 	@SuppressLint("InflateParams")
 	private void initView() {
-		rootView = (RelativeLayout) LayoutInflater.from(getContext()).inflate(R.layout.view_x5_webview, null, false);
+		rootView = (RelativeLayout) LayoutInflater.from(getContext()).inflate(R.layout.view_amy_webview, null, false);
 
-		x5Webview = (WebView) rootView.findViewById(R.id.x5webview);
+		x5Webview = (WebView) rootView.findViewById(R.id.webview);
 		loadingView = (LoadingView) rootView.findViewById(R.id.x5loading);
 		loadingView.setLoadingInterface(this);
 		initWebview();
@@ -148,6 +149,7 @@ public class X5WebView extends RelativeLayout implements LoadingInterface {
 		this.listener = listener;
 	}
 
+	@SuppressWarnings("deprecation")
 	public void destory() {
 		if (x5Webview != null) {
 			try {
@@ -180,12 +182,17 @@ public class X5WebView extends RelativeLayout implements LoadingInterface {
 		x5Webview.goBack();
 	}
 
+	private boolean loadingFinish = false;
+	private boolean overrideURL = false;
+
 	private class EsWebViewClient extends WebViewClient {
 
 		private boolean loadingError = false;
 
 		@Override
 		public boolean shouldOverrideUrlLoading(WebView view, String url) {
+			NLog.e("amywebview::shouldOverrideUrlLoading[" + url + "]");
+			overrideURL = true;
 			view.loadUrl(url);
 			if (listener != null) {
 				listener.onUrlChanged(url);
@@ -193,10 +200,13 @@ public class X5WebView extends RelativeLayout implements LoadingInterface {
 			return true;
 		}
 
+		@SuppressWarnings("deprecation")
 		@Override
 		public void onPageFinished(WebView view, String url) {
-
 			super.onPageFinished(view, url);
+			loadingFinish = true;
+			overrideURL = false;
+			NLog.e("amywebview::onPageFinished[" + url + "]");
 			// 优化性能，同时兼容19版本后不能正常显示的问题
 			if (x5Webview != null && x5Webview.getSettings() != null && !x5Webview.getSettings().getLoadsImagesAutomatically()) {
 				x5Webview.getSettings().setLoadsImagesAutomatically(true);
@@ -226,6 +236,13 @@ public class X5WebView extends RelativeLayout implements LoadingInterface {
 		@Override
 		public void onPageStarted(WebView view, String url, Bitmap favicon) {
 			super.onPageStarted(view, url, favicon);
+			loadingFinish = false;
+			NLog.e("amywebview::onPageStarted[" + url + "]");
+
+			if (overrideURL) {
+				return;
+			}
+
 			x5Webview.setVisibility(View.GONE);
 			loadingView.startLoading();
 			loadingView.setVisibility(View.VISIBLE);
@@ -236,6 +253,7 @@ public class X5WebView extends RelativeLayout implements LoadingInterface {
 		@Override
 		public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
 			super.onReceivedError(view, errorCode, description, failingUrl);
+			NLog.e("amywebview::onReceivedError[" + failingUrl + "]");
 			if (listener != null) {
 				listener.onWebPageLoadFailed(errorCode, description);
 			}
@@ -250,6 +268,7 @@ public class X5WebView extends RelativeLayout implements LoadingInterface {
 		@Override
 		public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
 			handler.proceed();
+			NLog.e("amywebview::onReceivedSslError[" + error + "]");
 		}
 	}
 
@@ -257,6 +276,11 @@ public class X5WebView extends RelativeLayout implements LoadingInterface {
 		@Override
 		public void onProgressChanged(WebView view, int newProgress) {
 			super.onProgressChanged(view, newProgress);
+			if (loadingFinish || overrideURL) {
+				loadingView.setVisibility(View.GONE);
+				return;
+			}
+			NLog.e("amywebview::onProgressChanged[" + newProgress + "]");
 			if (listener != null) {
 				listener.onWebPageLoadProgressChanged(newProgress);
 			}
@@ -266,15 +290,18 @@ public class X5WebView extends RelativeLayout implements LoadingInterface {
 
 		@Override
 		public final void onReceivedTitle(WebView view, String title) {
+			NLog.e("amywebview::onReceivedTitle[" + title + "]");
 		}
 
 		@Override
 		public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
+			NLog.e("amywebview::onConsoleMessage[" + consoleMessage + "]");
 			return true;
 		}
 
 		@Override
 		public boolean onJsAlert(WebView view, String url, String message, final JsResult result) {
+			NLog.e("amywebview::onJsAlert[" + url + "]");
 			AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext()).setTitle(R.string.html_alert_title).setMessage(message)
 					.setPositiveButton(R.string.ok, new AlertDialog.OnClickListener() {
 						@Override

@@ -3,17 +3,23 @@ package com.amytech.randomlooking.view.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.amytech.android.library.base.extras.BaseTabItemFragment;
+import com.amytech.android.library.share.view.PickShareDialog;
+import com.amytech.android.library.share.view.PickShareDialog.ShareCallback;
 import com.amytech.android.library.utils.ImageUtils;
 import com.amytech.android.library.views.Topbar;
 import com.amytech.android.library.views.Topbar.TopbarIcon;
@@ -22,6 +28,10 @@ import com.amytech.randomlooking.R;
 import com.amytech.randomlooking.manager.GirlManager;
 import com.amytech.randomlooking.manager.GirlManager.GirlGetCallback;
 import com.amytech.randomlooking.model.GirlModel;
+import com.amytech.randomlooking.view.WebviewActivity;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 /**
@@ -34,7 +44,9 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
  *
  * @author marktlzhai
  */
-public class FragmentGirl extends BaseTabItemFragment implements GirlGetCallback {
+public class FragmentGirl extends BaseTabItemFragment implements GirlGetCallback, ShareCallback {
+
+	private static final int LOAD_COUNT = 50;
 
 	private Topbar topbar;
 
@@ -65,9 +77,27 @@ public class FragmentGirl extends BaseTabItemFragment implements GirlGetCallback
 		girlList = (PullToRefreshListView) findViewById(R.id.girl_list);
 		girlList.getRefreshableView().setDivider(new ColorDrawable(getResources().getColor(R.color.color_base_title)));
 		girlList.getRefreshableView().setDividerHeight(1);
+		girlList.setMode(Mode.PULL_FROM_START);
+		girlList.setOnRefreshListener(new OnRefreshListener<ListView>() {
+			@Override
+			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+				girlAdapter.clear();
+				loadData();
+			}
+		});
 
 		girlAdapter = new GirlAdapter();
 		girlList.getRefreshableView().setAdapter(girlAdapter);
+		girlList.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				GirlModel item = (GirlModel) parent.getItemAtPosition(position);
+				Intent i = new Intent(getActivity(), WebviewActivity.class);
+				i.putExtra(WebviewActivity.DATA_KEY_TITLE, item.title);
+				i.putExtra(WebviewActivity.DATA_KEY_URL, item.getMobileUrl());
+				startActivity(i);
+			}
+		});
 
 		loadData();
 	}
@@ -75,13 +105,15 @@ public class FragmentGirl extends BaseTabItemFragment implements GirlGetCallback
 	private void loadData() {
 		girlLoadingView.setText(R.string.waitting);
 		girlLoadingView.setOnClickListener(null);
-		GirlManager.getInstance().load(10, this);
+		GirlManager.getInstance().load(LOAD_COUNT, this);
 	}
 
 	@Override
 	public void girlGetSuccess(List<GirlModel> result) {
 		girlLoadingView.setVisibility(View.GONE);
 		girlAdapter.setData(result);
+
+		girlList.onRefreshComplete();
 	}
 
 	@Override
@@ -94,6 +126,7 @@ public class FragmentGirl extends BaseTabItemFragment implements GirlGetCallback
 				loadData();
 			}
 		});
+		girlList.onRefreshComplete();
 	}
 
 	class GirlAdapter extends BaseAdapter {
@@ -143,7 +176,7 @@ public class FragmentGirl extends BaseTabItemFragment implements GirlGetCallback
 
 				holder.girlImage = (ImageView) convertView.findViewById(R.id.girl_pic);
 				holder.girlTitle = (TextView) convertView.findViewById(R.id.girl_title);
-				holder.girlDesc = (TextView) convertView.findViewById(R.id.girl_desc);
+				holder.girlShare = convertView.findViewById(R.id.share_layout);
 
 				convertView.setTag(holder);
 			} else {
@@ -151,8 +184,13 @@ public class FragmentGirl extends BaseTabItemFragment implements GirlGetCallback
 			}
 
 			holder.girlTitle.setText(Html.fromHtml(item.title));
-			holder.girlDesc.setText(item.description);
-			ImageUtils.displayImage(holder.girlImage, item.picUrl, ImageUtils.getDefaultDisplayOptions());
+			ImageUtils.displayImage(App.getInstance(), holder.girlImage, item.picUrl, R.dimen.girl_image_size, R.dimen.girl_image_size);
+			holder.girlShare.setOnClickListener(new OnClickListener() {
+				public void onClick(View v) {
+					PickShareDialog shareDialog = new PickShareDialog(getActivity(), App.WX_APPID, App.QQ_APPID, FragmentGirl.this);
+					shareDialog.show();
+				}
+			});
 
 			return convertView;
 		}
@@ -161,6 +199,31 @@ public class FragmentGirl extends BaseTabItemFragment implements GirlGetCallback
 	class ViewHolder {
 		public ImageView girlImage;
 		public TextView girlTitle;
-		public TextView girlDesc;
+		public View girlShare;
+	}
+
+	@Override
+	public void shareqq() {
+		showToast("share to qq");
+	}
+
+	@Override
+	public void sharewx() {
+		showToast("share to wx");
+	}
+
+	@Override
+	public void sharewxf() {
+		showToast("share to wxf");
+	}
+
+	@Override
+	public void sharesms() {
+		showToast("share to sms");
+	}
+
+	@Override
+	public void shareCancel() {
+		showToast("share cancel");
 	}
 }

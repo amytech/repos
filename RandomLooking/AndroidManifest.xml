@@ -30,6 +30,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.amytech.randomlooking.view.HomeActivity" />
+        <activity android:name="com.amytech.randomlooking.view.WebviewActivity" />
 
         <!-- QQ相关 -->
         <activity

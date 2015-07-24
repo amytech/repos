@@ -8,6 +8,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
@@ -122,5 +123,20 @@ public class AppUtils {
 		intent.setData(Uri.parse("market://details?id=" + packageName));
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		BaseApplication.getInstance().startActivity(intent);
+	}
+
+	public static boolean isInstallApp(Context context, String appPackage) {
+		PackageInfo packageInfo = null;
+		try {
+			packageInfo = context.getPackageManager().getPackageInfo(appPackage, 0);
+		} catch (NameNotFoundException e) {
+			packageInfo = null;
+			e.printStackTrace();
+		}
+		if (packageInfo == null) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 }

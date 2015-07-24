@@ -3,15 +3,15 @@ package com.amytech.android.library.share;
 import org.json.JSONObject;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 
+import com.amytech.android.library.base.BaseApplication;
 import com.amytech.android.library.share.model.QQGetInfoResponse;
 import com.amytech.android.library.share.model.QQLoginResponse;
+import com.amytech.android.library.utils.AppUtils;
 import com.amytech.android.library.utils.SPUtils;
 import com.tencent.connect.UserInfo;
-import com.tencent.connect.auth.QQToken;
 import com.tencent.connect.share.QQShare;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
@@ -43,6 +43,8 @@ public class AmyQQ {
 		void qqGetinfoFailure(UiError uiError);
 	}
 
+	private static final String QQ_APP_PKG_NAME = "com.tencent.mobileqq";
+
 	private SPUtils spUtils;
 
 	private Tencent tencent;
@@ -53,16 +55,20 @@ public class AmyQQ {
 	private static final String SP_QQ_TOKEN = "QQ_TOKEN";
 	private static final String SP_QQ_OPENID = "QQ_OPENID";
 
-	private AmyQQ(String appid, Application app) {
-		tencent = Tencent.createInstance(appid, app);
-		spUtils = new SPUtils(app.getPackageName());
+	private AmyQQ(String appid) {
+		tencent = Tencent.createInstance(appid, BaseApplication.getInstance());
+		spUtils = new SPUtils(BaseApplication.getInstance().getPackageName());
 	}
 
-	public static AmyQQ getInstance(String appid, Application app) {
+	public static AmyQQ getInstance(String appid) {
 		if (instance == null) {
-			instance = new AmyQQ(appid, app);
+			instance = new AmyQQ(appid);
 		}
 		return instance;
+	}
+
+	public boolean isQQInstall() {
+		return AppUtils.isInstallApp(BaseApplication.getInstance(), QQ_APP_PKG_NAME);
 	}
 
 	public void login(Activity activity, final QQLoginInterface listener) {

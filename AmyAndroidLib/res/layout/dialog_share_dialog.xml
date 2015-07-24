@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_base_dialog"
+    android:orientation="vertical"
+    android:padding="10dp" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/share_to"
+        android:textColor="@color/color_base_background"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/share_to_qq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="5dp"
+            android:drawableTop="@drawable/selector_share_qq"
+            android:gravity="center_horizontal"
+            android:text="@string/share_qq"
+            android:textColor="@color/color_base_background"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/share_to_wx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="5dp"
+            android:drawableTop="@drawable/selector_share_wx"
+            android:gravity="center_horizontal"
+            android:text="@string/share_wx"
+            android:textColor="@color/color_base_background"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/share_to_wxf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="5dp"
+            android:drawableTop="@drawable/selector_share_wx_f"
+            android:gravity="center_horizontal"
+            android:text="@string/share_wxf"
+            android:textColor="@color/color_base_background"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/share_to_sms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="5dp"
+            android:drawableTop="@drawable/selector_share_sms"
+            android:gravity="center_horizontal"
+            android:text="@string/share_sms"
+            android:textColor="@color/color_base_background"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/share_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/selector_login_button"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:text="@string/cancel"
+        android:textColor="@color/color_base_background"
+        android:textSize="16sp" />
+
+</LinearLayout>

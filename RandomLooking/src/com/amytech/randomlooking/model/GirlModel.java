@@ -14,7 +14,7 @@ public class GirlModel {
 	public String title;
 	public String description;
 	public String picUrl;
-	public String url;
+	private String url;
 
 	public GirlModel() {
 		super();
@@ -30,6 +30,15 @@ public class GirlModel {
 
 	@Override
 	public String toString() {
-		return title;
+		return url;
+	}
+
+	public String getMobileUrl() {
+		int sub = url.indexOf("www.27270.com");
+		if (sub > 0) {
+			return url.replaceFirst("www.27270.com", "m.27270.com");
+		} else {
+			return url;
+		}
 	}
 }
