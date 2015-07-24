@@ -2,13 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.amytech.randomlooking"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.15.724" >
 
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="22" />
 
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -43,7 +43,7 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                
+
                 <data android:scheme="tencent1104707169" />
             </intent-filter>
         </activity>
