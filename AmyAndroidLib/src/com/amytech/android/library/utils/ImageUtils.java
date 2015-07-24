@@ -1,10 +1,11 @@
 package com.amytech.android.library.utils;
 
-import com.squareup.picasso.Picasso;
-
 import android.content.Context;
 import android.net.Uri;
 import android.widget.ImageView;
+
+import com.amytech.android.library.R;
+import com.squareup.picasso.Picasso;
 
 /**
  * Title: AmyAndroidLib <br>
@@ -18,7 +19,20 @@ import android.widget.ImageView;
  */
 public class ImageUtils {
 
+	public static void displayImage(Context context, ImageView imageView, String imageURL, int widthDimens, int heightDimens, int noImageResource) {
+		if (StringUtils.isNotEmpty(imageURL)) {
+			Picasso.with(context).load(Uri.decode(imageURL)).resizeDimen(widthDimens, heightDimens).error(noImageResource).centerCrop().into(imageView);
+		} else {
+			imageView.setImageResource(noImageResource);
+		}
+	}
+
 	public static void displayImage(Context context, ImageView imageView, String imageURL, int widthDimens, int heightDimens) {
-		Picasso.with(context).load(Uri.decode(imageURL)).resizeDimen(widthDimens, heightDimens).centerCrop().into(imageView);
+		if (StringUtils.isNotEmpty(imageURL)) {
+			Picasso.with(context).load(Uri.decode(imageURL)).resizeDimen(widthDimens, heightDimens).error(R.drawable.image_loader_icon).centerCrop()
+					.into(imageView);
+		} else {
+			imageView.setImageResource(R.drawable.image_loader_icon);
+		}
 	}
 }

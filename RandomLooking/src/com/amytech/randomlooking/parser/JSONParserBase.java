@@ -29,7 +29,7 @@ public class JSONParserBase {
 	}
 
 	public static List<JSONObject> getData(JSONObject json, int count) {
-		List<JSONObject> result = new ArrayList<JSONObject>();
+		List<JSONObject> result = new ArrayList<JSONObject>(count);
 		for (int i = 0; i < count; i++) {
 			result.add(json.optJSONObject(String.valueOf(i)));
 		}

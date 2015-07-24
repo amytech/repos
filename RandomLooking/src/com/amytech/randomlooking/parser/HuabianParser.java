@@ -25,11 +25,13 @@ public class HuabianParser extends JSONParserBase {
 		if (isSuccess(json)) {
 			List<JSONObject> jsonDatas = getData(json, count);
 			for (JSONObject jsonData : jsonDatas) {
-				String title = jsonData.optString("title");
-				String date = jsonData.optString("time");
-				String picUrl = jsonData.optString("picUrl");
-				String url = jsonData.optString("url");
-				result.add(new HuabianModel(title, date, picUrl, url));
+				if (jsonData != null) {
+					String title = jsonData.optString("title");
+					String date = jsonData.optString("time");
+					String picUrl = jsonData.optString("picUrl");
+					String url = jsonData.optString("url");
+					result.add(new HuabianModel(title, date, picUrl, url));
+				}
 			}
 		}
 

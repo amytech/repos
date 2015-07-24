@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.json.JSONObject;
 
-import com.amytech.randomlooking.model.GirlModel;
+import com.amytech.randomlooking.model.SocialModel;
 
 /**
  * Title: RandomLooking <br>
@@ -17,20 +17,20 @@ import com.amytech.randomlooking.model.GirlModel;
  *
  * @author marktlzhai
  */
-public class GirlParser extends JSONParserBase {
+public class SocialParser extends JSONParserBase {
 
-	public static List<GirlModel> parse(JSONObject json, int count) {
-		List<GirlModel> result = new ArrayList<GirlModel>();
+	public static List<SocialModel> parse(JSONObject json, int count) {
+		List<SocialModel> result = new ArrayList<SocialModel>();
 
 		if (isSuccess(json)) {
 			List<JSONObject> jsonDatas = getData(json, count);
 			for (JSONObject jsonData : jsonDatas) {
 				if (jsonData != null) {
 					String title = jsonData.optString("title");
-					String description = jsonData.optString("description");
+					String date = jsonData.optString("time");
 					String picUrl = jsonData.optString("picUrl");
 					String url = jsonData.optString("url");
-					result.add(new GirlModel(title, description, picUrl, url));
+					result.add(new SocialModel(title, date, picUrl, url));
 				}
 			}
 		}

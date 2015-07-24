@@ -50,7 +50,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
  */
 public class FragmentGirl extends BaseTabItemFragment implements GirlGetCallback {
 
-	private static final int LOAD_COUNT = 50;
+	private static final int LOAD_COUNT = 30;
 
 	private Topbar topbar;
 
@@ -169,11 +169,11 @@ public class FragmentGirl extends BaseTabItemFragment implements GirlGetCallback
 			final GirlModel item = getItem(position);
 
 			if (convertView == null) {
-				convertView = inflater.inflate(R.layout.item_girl, parent, false);
+				convertView = inflater.inflate(R.layout.item_single, parent, false);
 				holder = new ViewHolder();
 
-				holder.girlImage = (ImageView) convertView.findViewById(R.id.girl_pic);
-				holder.girlTitle = (TextView) convertView.findViewById(R.id.girl_title);
+				holder.girlImage = (ImageView) convertView.findViewById(R.id.item_single_pic);
+				holder.girlTitle = (TextView) convertView.findViewById(R.id.item_single_title);
 				holder.girlShare = convertView.findViewById(R.id.share_layout);
 
 				convertView.setTag(holder);

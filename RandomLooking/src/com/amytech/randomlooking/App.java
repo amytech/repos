@@ -1,7 +1,6 @@
 package com.amytech.randomlooking;
 
 import com.amytech.android.library.base.BaseApplication;
-import com.amytech.android.library.utils.ImageUtils;
 import com.amytech.umeng.analytics.UMengAnalytic;
 
 /**

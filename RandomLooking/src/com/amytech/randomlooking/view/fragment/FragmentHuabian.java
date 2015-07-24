@@ -50,7 +50,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
  */
 public class FragmentHuabian extends BaseTabItemFragment implements HuabianGetCallback {
 
-	private static final int LOAD_COUNT = 30;
+	private static final int LOAD_COUNT = 50;
 
 	private Topbar topbar;
 
@@ -148,12 +148,12 @@ public class FragmentHuabian extends BaseTabItemFragment implements HuabianGetCa
 			final HuabianModel item = getItem(position);
 
 			if (convertView == null) {
-				convertView = inflater.inflate(R.layout.item_huabian, parent, false);
+				convertView = inflater.inflate(R.layout.item_double, parent, false);
 				holder = new ViewHolder();
 
-				holder.huabianImage = (ImageView) convertView.findViewById(R.id.huabian_pic);
-				holder.huabianTitle = (TextView) convertView.findViewById(R.id.huabian_title);
-				holder.huabianDate = (TextView) convertView.findViewById(R.id.huabian_date);
+				holder.huabianImage = (ImageView) convertView.findViewById(R.id.item_double_pic);
+				holder.huabianTitle = (TextView) convertView.findViewById(R.id.item_double_title);
+				holder.huabianDate = (TextView) convertView.findViewById(R.id.item_double_subtitle);
 				holder.huabianShare = convertView.findViewById(R.id.share_layout);
 
 				convertView.setTag(holder);

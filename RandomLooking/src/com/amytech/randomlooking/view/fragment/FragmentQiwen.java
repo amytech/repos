@@ -29,9 +29,9 @@ import com.amytech.android.library.utils.ImageUtils;
 import com.amytech.android.library.views.Topbar;
 import com.amytech.randomlooking.App;
 import com.amytech.randomlooking.R;
-import com.amytech.randomlooking.manager.WXManager;
-import com.amytech.randomlooking.manager.WXManager.WXGetCallback;
-import com.amytech.randomlooking.model.WXModel;
+import com.amytech.randomlooking.manager.QiwenManager;
+import com.amytech.randomlooking.manager.QiwenManager.QiwenGetCallback;
+import com.amytech.randomlooking.model.QiwenModel;
 import com.amytech.randomlooking.view.WebviewActivity;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -48,19 +48,19 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
  *
  * @author marktlzhai
  */
-public class FragmentWX extends BaseTabItemFragment implements WXGetCallback {
+public class FragmentQiwen extends BaseTabItemFragment implements QiwenGetCallback {
 
 	private static final int LOAD_COUNT = 30;
 
 	private Topbar topbar;
 
-	private TextView wxLoadingView;
+	private TextView qiwenLoadingView;
 
-	private PullToRefreshListView wxList;
+	private PullToRefreshListView qiwenList;
 
-	private wxAdapter wxAdapter;
+	private qiwenAdapter qiwenAdapter;
 
-	private List<WXModel> wxData;
+	private List<QiwenModel> qiwenData;
 
 	@Override
 	protected int getLayoutID() {
@@ -70,27 +70,27 @@ public class FragmentWX extends BaseTabItemFragment implements WXGetCallback {
 	@Override
 	protected void initViews() {
 		topbar = (Topbar) findViewById(R.id.topbar);
-		topbar.setTitle(R.string.tab_huabian);
+		topbar.setTitle(R.string.tab_qiwen);
 
-		wxLoadingView = (TextView) findViewById(R.id.reload_text);
-		wxList = (PullToRefreshListView) findViewById(R.id.data_list);
-		wxList.getRefreshableView().setDivider(new ColorDrawable(getResources().getColor(R.color.color_base_title)));
-		wxList.getRefreshableView().setDividerHeight(1);
-		wxList.setMode(Mode.PULL_FROM_START);
-		wxList.setOnRefreshListener(new OnRefreshListener<ListView>() {
+		qiwenLoadingView = (TextView) findViewById(R.id.reload_text);
+		qiwenList = (PullToRefreshListView) findViewById(R.id.data_list);
+		qiwenList.getRefreshableView().setDivider(new ColorDrawable(getResources().getColor(R.color.color_base_title)));
+		qiwenList.getRefreshableView().setDividerHeight(1);
+		qiwenList.setMode(Mode.PULL_FROM_START);
+		qiwenList.setOnRefreshListener(new OnRefreshListener<ListView>() {
 			@Override
 			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
-				wxAdapter.clear();
+				qiwenAdapter.clear();
 				loadData();
 			}
 		});
 
-		wxAdapter = new wxAdapter();
-		wxList.getRefreshableView().setAdapter(wxAdapter);
-		wxList.setOnItemClickListener(new OnItemClickListener() {
+		qiwenAdapter = new qiwenAdapter();
+		qiwenList.getRefreshableView().setAdapter(qiwenAdapter);
+		qiwenList.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				final WXModel item = (WXModel) parent.getItemAtPosition(position);
+				final QiwenModel item = (QiwenModel) parent.getItemAtPosition(position);
 				Intent i = new Intent(getActivity(), WebviewActivity.class);
 				i.putExtra(WebviewActivity.DATA_ITEM, item);
 				startActivity(i);
@@ -101,39 +101,60 @@ public class FragmentWX extends BaseTabItemFragment implements WXGetCallback {
 	}
 
 	private void loadData() {
-		wxLoadingView.setText(R.string.waitting);
-		wxLoadingView.setOnClickListener(null);
-		WXManager.getInstance().load(LOAD_COUNT, this);
+		qiwenLoadingView.setText(R.string.waitting);
+		qiwenLoadingView.setOnClickListener(null);
+		QiwenManager.getInstance().load(LOAD_COUNT, this);
 	}
 
-	class wxAdapter extends BaseAdapter {
+	@Override
+	public void qiwenGetSuccess(List<QiwenModel> result) {
+		qiwenLoadingView.setVisibility(View.GONE);
+		qiwenAdapter.setData(result);
+
+		qiwenList.onRefreshComplete();
+	}
+
+	@Override
+	public void qiwenGetFailure() {
+		qiwenAdapter.clear();
+		qiwenLoadingView.setVisibility(View.VISIBLE);
+		qiwenLoadingView.setText(R.string.loading_error_click);
+		qiwenLoadingView.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				loadData();
+			}
+		});
+		qiwenList.onRefreshComplete();
+	}
+
+	class qiwenAdapter extends BaseAdapter {
 
 		private LayoutInflater inflater;
 
-		public wxAdapter() {
-			wxData = new ArrayList<WXModel>();
+		public qiwenAdapter() {
+			qiwenData = new ArrayList<QiwenModel>();
 			inflater = LayoutInflater.from(App.getInstance());
 		}
 
 		public void clear() {
-			wxData.clear();
+			qiwenData.clear();
 			notifyDataSetChanged();
 		}
 
-		public void setData(List<WXModel> data) {
-			wxData.clear();
-			wxData.addAll(data);
+		public void setData(List<QiwenModel> data) {
+			qiwenData.clear();
+			qiwenData.addAll(data);
 			notifyDataSetChanged();
 		}
 
 		@Override
 		public int getCount() {
-			return wxData.size();
+			return qiwenData.size();
 		}
 
 		@Override
-		public WXModel getItem(int position) {
-			return wxData.get(position);
+		public QiwenModel getItem(int position) {
+			return qiwenData.get(position);
 		}
 
 		@Override
@@ -145,26 +166,24 @@ public class FragmentWX extends BaseTabItemFragment implements WXGetCallback {
 		public View getView(int position, View convertView, ViewGroup parent) {
 			ViewHolder holder;
 
-			final WXModel item = getItem(position);
+			final QiwenModel item = getItem(position);
 
 			if (convertView == null) {
-				convertView = inflater.inflate(R.layout.item_double, parent, false);
+				convertView = inflater.inflate(R.layout.item_single, parent, false);
 				holder = new ViewHolder();
 
-				holder.wxImage = (ImageView) convertView.findViewById(R.id.item_double_pic);
-				holder.wxTitle = (TextView) convertView.findViewById(R.id.item_double_title);
-				holder.wxfrom = (TextView) convertView.findViewById(R.id.item_double_subtitle);
-				holder.wxShare = convertView.findViewById(R.id.share_layout);
+				holder.qiwenImage = (ImageView) convertView.findViewById(R.id.item_single_pic);
+				holder.qiwenTitle = (TextView) convertView.findViewById(R.id.item_single_title);
+				holder.qiwenShare = convertView.findViewById(R.id.share_layout);
 
 				convertView.setTag(holder);
 			} else {
 				holder = (ViewHolder) convertView.getTag();
 			}
 
-			holder.wxTitle.setText(Html.fromHtml(item.getTitle()));
-			holder.wxfrom.setText(Html.fromHtml(item.getSummary()));
-			ImageUtils.displayImage(App.getInstance(), holder.wxImage, item.getImageURL(), R.dimen.list_item_image_size, R.dimen.list_item_image_size);
-			holder.wxShare.setOnClickListener(new OnClickListener() {
+			holder.qiwenTitle.setText(Html.fromHtml(item.getTitle()));
+			ImageUtils.displayImage(App.getInstance(), holder.qiwenImage, item.getImageURL(), R.dimen.list_item_image_size, R.dimen.list_item_image_size);
+			holder.qiwenShare.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
 					PickShareDialog shareDialog = new PickShareDialog(getActivity(), App.WX_APPID, App.QQ_APPID, new ShareCallback() {
 						@Override
@@ -205,30 +224,8 @@ public class FragmentWX extends BaseTabItemFragment implements WXGetCallback {
 	}
 
 	class ViewHolder {
-		public ImageView wxImage;
-		public TextView wxTitle;
-		public TextView wxfrom;
-		public View wxShare;
-	}
-
-	@Override
-	public void wxGetSuccess(List<WXModel> result) {
-		wxLoadingView.setVisibility(View.GONE);
-		wxAdapter.setData(result);
-
-		wxList.onRefreshComplete();
-	}
-
-	@Override
-	public void wxGetFailure() {
-		wxAdapter.clear();
-		wxLoadingView.setVisibility(View.VISIBLE);
-		wxLoadingView.setText(R.string.loading_error_click);
-		wxLoadingView.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				loadData();
-			}
-		});
-		wxList.onRefreshComplete();
+		public ImageView qiwenImage;
+		public TextView qiwenTitle;
+		public View qiwenShare;
 	}
 }

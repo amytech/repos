@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.json.JSONObject;
 
-import com.amytech.randomlooking.model.GirlModel;
+import com.amytech.randomlooking.model.QiwenModel;
 
 /**
  * Title: RandomLooking <br>
@@ -17,10 +17,10 @@ import com.amytech.randomlooking.model.GirlModel;
  *
  * @author marktlzhai
  */
-public class GirlParser extends JSONParserBase {
+public class QiwenParser extends JSONParserBase {
 
-	public static List<GirlModel> parse(JSONObject json, int count) {
-		List<GirlModel> result = new ArrayList<GirlModel>();
+	public static List<QiwenModel> parse(JSONObject json, int count) {
+		List<QiwenModel> result = new ArrayList<QiwenModel>();
 
 		if (isSuccess(json)) {
 			List<JSONObject> jsonDatas = getData(json, count);
@@ -30,7 +30,7 @@ public class GirlParser extends JSONParserBase {
 					String description = jsonData.optString("description");
 					String picUrl = jsonData.optString("picUrl");
 					String url = jsonData.optString("url");
-					result.add(new GirlModel(title, description, picUrl, url));
+					result.add(new QiwenModel(title, description, picUrl, url));
 				}
 			}
 		}
