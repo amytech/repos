@@ -29,9 +29,9 @@ import com.amytech.android.library.utils.ImageUtils;
 import com.amytech.android.library.views.Topbar;
 import com.amytech.randomlooking.App;
 import com.amytech.randomlooking.R;
-import com.amytech.randomlooking.manager.GirlManager;
-import com.amytech.randomlooking.manager.GirlManager.GirlGetCallback;
-import com.amytech.randomlooking.model.GirlModel;
+import com.amytech.randomlooking.manager.HuabianManager;
+import com.amytech.randomlooking.manager.HuabianManager.HuabianGetCallback;
+import com.amytech.randomlooking.model.HuabianModel;
 import com.amytech.randomlooking.view.WebviewActivity;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
@@ -48,19 +48,19 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
  *
  * @author marktlzhai
  */
-public class FragmentGirl extends BaseTabItemFragment implements GirlGetCallback {
+public class FragmentHuabian extends BaseTabItemFragment implements HuabianGetCallback {
 
-	private static final int LOAD_COUNT = 50;
+	private static final int LOAD_COUNT = 30;
 
 	private Topbar topbar;
 
-	private TextView girlLoadingView;
+	private TextView huabianLoadingView;
 
-	private PullToRefreshListView girlList;
+	private PullToRefreshListView huabianList;
 
-	private GirlAdapter girlAdapter;
+	private huabianAdapter huabianAdapter;
 
-	private List<GirlModel> girlData;
+	private List<HuabianModel> huabianData;
 
 	@Override
 	protected int getLayoutID() {
@@ -70,27 +70,27 @@ public class FragmentGirl extends BaseTabItemFragment implements GirlGetCallback
 	@Override
 	protected void initViews() {
 		topbar = (Topbar) findViewById(R.id.topbar);
-		topbar.setTitle(R.string.tab_girl);
+		topbar.setTitle(R.string.tab_huabian);
 
-		girlLoadingView = (TextView) findViewById(R.id.reload_text);
-		girlList = (PullToRefreshListView) findViewById(R.id.data_list);
-		girlList.getRefreshableView().setDivider(new ColorDrawable(getResources().getColor(R.color.color_base_title)));
-		girlList.getRefreshableView().setDividerHeight(1);
-		girlList.setMode(Mode.PULL_FROM_START);
-		girlList.setOnRefreshListener(new OnRefreshListener<ListView>() {
+		huabianLoadingView = (TextView) findViewById(R.id.reload_text);
+		huabianList = (PullToRefreshListView) findViewById(R.id.data_list);
+		huabianList.getRefreshableView().setDivider(new ColorDrawable(getResources().getColor(R.color.color_base_title)));
+		huabianList.getRefreshableView().setDividerHeight(1);
+		huabianList.setMode(Mode.PULL_FROM_START);
+		huabianList.setOnRefreshListener(new OnRefreshListener<ListView>() {
 			@Override
 			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
-				girlAdapter.clear();
+				huabianAdapter.clear();
 				loadData();
 			}
 		});
 
-		girlAdapter = new GirlAdapter();
-		girlList.getRefreshableView().setAdapter(girlAdapter);
-		girlList.setOnItemClickListener(new OnItemClickListener() {
+		huabianAdapter = new huabianAdapter();
+		huabianList.getRefreshableView().setAdapter(huabianAdapter);
+		huabianList.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				final GirlModel item = (GirlModel) parent.getItemAtPosition(position);
+				final HuabianModel item = (HuabianModel) parent.getItemAtPosition(position);
 				Intent i = new Intent(getActivity(), WebviewActivity.class);
 				i.putExtra(WebviewActivity.DATA_ITEM, item);
 				startActivity(i);
@@ -101,60 +101,39 @@ public class FragmentGirl extends BaseTabItemFragment implements GirlGetCallback
 	}
 
 	private void loadData() {
-		girlLoadingView.setText(R.string.waitting);
-		girlLoadingView.setOnClickListener(null);
-		GirlManager.getInstance().load(LOAD_COUNT, this);
+		huabianLoadingView.setText(R.string.waitting);
+		huabianLoadingView.setOnClickListener(null);
+		HuabianManager.getInstance().load(LOAD_COUNT, this);
 	}
 
-	@Override
-	public void girlGetSuccess(List<GirlModel> result) {
-		girlLoadingView.setVisibility(View.GONE);
-		girlAdapter.setData(result);
-
-		girlList.onRefreshComplete();
-	}
-
-	@Override
-	public void girlGetFailure() {
-		girlAdapter.clear();
-		girlLoadingView.setVisibility(View.VISIBLE);
-		girlLoadingView.setText(R.string.loading_error_click);
-		girlLoadingView.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				loadData();
-			}
-		});
-		girlList.onRefreshComplete();
-	}
-
-	class GirlAdapter extends BaseAdapter {
+	class huabianAdapter extends BaseAdapter {
 
 		private LayoutInflater inflater;
 
-		public GirlAdapter() {
-			girlData = new ArrayList<GirlModel>();
+		public huabianAdapter() {
+			huabianData = new ArrayList<HuabianModel>();
 			inflater = LayoutInflater.from(App.getInstance());
 		}
 
 		public void clear() {
-			girlData.clear();
+			huabianData.clear();
 			notifyDataSetChanged();
 		}
 
-		public void setData(List<GirlModel> data) {
-			girlData.clear();
-			girlData.addAll(data);
+		public void setData(List<HuabianModel> data) {
+			huabianData.clear();
+			huabianData.addAll(data);
 			notifyDataSetChanged();
 		}
 
 		@Override
 		public int getCount() {
-			return girlData.size();
+			return huabianData.size();
 		}
 
 		@Override
-		public GirlModel getItem(int position) {
-			return girlData.get(position);
+		public HuabianModel getItem(int position) {
+			return huabianData.get(position);
 		}
 
 		@Override
@@ -166,24 +145,26 @@ public class FragmentGirl extends BaseTabItemFragment implements GirlGetCallback
 		public View getView(int position, View convertView, ViewGroup parent) {
 			ViewHolder holder;
 
-			final GirlModel item = getItem(position);
+			final HuabianModel item = getItem(position);
 
 			if (convertView == null) {
-				convertView = inflater.inflate(R.layout.item_girl, parent, false);
+				convertView = inflater.inflate(R.layout.item_huabian, parent, false);
 				holder = new ViewHolder();
 
-				holder.girlImage = (ImageView) convertView.findViewById(R.id.girl_pic);
-				holder.girlTitle = (TextView) convertView.findViewById(R.id.girl_title);
-				holder.girlShare = convertView.findViewById(R.id.share_layout);
+				holder.huabianImage = (ImageView) convertView.findViewById(R.id.huabian_pic);
+				holder.huabianTitle = (TextView) convertView.findViewById(R.id.huabian_title);
+				holder.huabianDate = (TextView) convertView.findViewById(R.id.huabian_date);
+				holder.huabianShare = convertView.findViewById(R.id.share_layout);
 
 				convertView.setTag(holder);
 			} else {
 				holder = (ViewHolder) convertView.getTag();
 			}
 
-			holder.girlTitle.setText(Html.fromHtml(item.getTitle()));
-			ImageUtils.displayImage(App.getInstance(), holder.girlImage, item.getImageURL(), R.dimen.list_item_image_size, R.dimen.list_item_image_size);
-			holder.girlShare.setOnClickListener(new OnClickListener() {
+			holder.huabianTitle.setText(Html.fromHtml(item.getTitle()));
+			holder.huabianDate.setText(Html.fromHtml(item.getSummary()));
+			ImageUtils.displayImage(App.getInstance(), holder.huabianImage, item.getImageURL(), R.dimen.list_item_image_size, R.dimen.list_item_image_size);
+			holder.huabianShare.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
 					PickShareDialog shareDialog = new PickShareDialog(getActivity(), App.WX_APPID, App.QQ_APPID, new ShareCallback() {
 						@Override
@@ -224,8 +205,30 @@ public class FragmentGirl extends BaseTabItemFragment implements GirlGetCallback
 	}
 
 	class ViewHolder {
-		public ImageView girlImage;
-		public TextView girlTitle;
-		public View girlShare;
+		public ImageView huabianImage;
+		public TextView huabianTitle;
+		public TextView huabianDate;
+		public View huabianShare;
+	}
+
+	@Override
+	public void huabianGetSuccess(List<HuabianModel> result) {
+		huabianLoadingView.setVisibility(View.GONE);
+		huabianAdapter.setData(result);
+
+		huabianList.onRefreshComplete();
+	}
+
+	@Override
+	public void huabianGetFailure() {
+		huabianAdapter.clear();
+		huabianLoadingView.setVisibility(View.VISIBLE);
+		huabianLoadingView.setText(R.string.loading_error_click);
+		huabianLoadingView.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				loadData();
+			}
+		});
+		huabianList.onRefreshComplete();
 	}
 }

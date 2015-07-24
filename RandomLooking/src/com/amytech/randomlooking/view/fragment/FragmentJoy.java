@@ -25,6 +25,6 @@ public class FragmentJoy extends BaseTabItemFragment {
 	@Override
 	protected void initViews() {
 		TextView test = (TextView) findViewById(R.id.layout_test_tv);
-		test.setText(R.string.tab_joy);
+		test.setText(R.string.tab_qiwen);
 	}
 }

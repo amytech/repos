@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.amytech.android.library.base.extras.BaseTabActivity;
 import com.amytech.android.library.utils.AppUtils;
 import com.amytech.randomlooking.R;
-import com.amytech.randomlooking.view.fragment.FragmentFunny;
+import com.amytech.randomlooking.view.fragment.FragmentHuabian;
 import com.amytech.randomlooking.view.fragment.FragmentGirl;
 import com.amytech.randomlooking.view.fragment.FragmentJoy;
 import com.amytech.randomlooking.view.fragment.FragmentSocial;
@@ -37,9 +37,9 @@ public class HomeActivity extends BaseTabActivity {
 		// 微信精选
 		tabList.add(new TabItem(FragmentWX.class, R.string.tab_weixin, android.R.color.transparent));
 		// 娱乐花边
-		tabList.add(new TabItem(FragmentJoy.class, R.string.tab_joy, android.R.color.transparent));
+		tabList.add(new TabItem(FragmentJoy.class, R.string.tab_qiwen, android.R.color.transparent));
 		// 奇闻趣事
-		tabList.add(new TabItem(FragmentFunny.class, R.string.tab_funny, android.R.color.transparent));
+		tabList.add(new TabItem(FragmentHuabian.class, R.string.tab_huabian, android.R.color.transparent));
 		// 社会新闻
 		tabList.add(new TabItem(FragmentSocial.class, R.string.tab_social, android.R.color.transparent));
 

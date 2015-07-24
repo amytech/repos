@@ -1,5 +1,5 @@
 <resources>
 
-    <dimen name="girl_image_size">120dp</dimen>
+    <dimen name="list_item_image_size">120dp</dimen>
 
 </resources>

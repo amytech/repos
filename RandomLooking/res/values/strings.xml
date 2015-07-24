@@ -2,8 +2,8 @@
 <resources>
 
     <string name="app_name">乱看</string>
-    <string name="app_share_title">乱看分享图片</string>
-    <string name="app_share_sms">乱看APP分享图片, 请点击{0}查看。</string>
+    <string name="app_share_title">乱看分享</string>
+    <string name="app_share_sms">乱看APP分享, 请点击{0}查看。</string>
 
     <!-- SplashActivity -->
     <string name="login_auto">正在自动登录，请稍后</string>
@@ -15,8 +15,8 @@
     <!-- HomeActivity -->
     <string name="tab_girl">美女图片</string>
     <string name="tab_weixin">微信精选</string>
-    <string name="tab_joy">娱乐花边</string>
-    <string name="tab_funny">奇闻趣事</string>
+    <string name="tab_qiwen">奇闻趣事</string>
+    <string name="tab_huabian">娱乐花边</string>
     <string name="tab_social">社会新闻</string>
     
 </resources>

@@ -19,7 +19,7 @@ import com.amytech.android.library.views.Topbar.TopbarIcon;
 import com.amytech.android.library.views.webview.AmyWebView;
 import com.amytech.randomlooking.App;
 import com.amytech.randomlooking.R;
-import com.amytech.randomlooking.model.GirlModel;
+import com.amytech.randomlooking.model.BaseItemModel;
 
 /**
  * Title: RandomLooking <br>
@@ -55,8 +55,8 @@ public class WebviewActivity extends BaseWebViewActivity {
 			}
 		});
 
-		if (item instanceof GirlModel) {
-			topbar.setTitle(((GirlModel) item).title);
+		if (item instanceof BaseItemModel) {
+			topbar.setTitle(((BaseItemModel) item).getTitle());
 		}
 	}
 
@@ -68,8 +68,8 @@ public class WebviewActivity extends BaseWebViewActivity {
 			finish();
 		}
 
-		if (item instanceof GirlModel) {
-			webview.startLoadWebPage(((GirlModel) item).getMobileUrl());
+		if (item instanceof BaseItemModel) {
+			webview.startLoadWebPage(((BaseItemModel) item).getTargetURL());
 		}
 	}
 
@@ -77,33 +77,33 @@ public class WebviewActivity extends BaseWebViewActivity {
 		PickShareDialog shareDialog = new PickShareDialog(this, App.WX_APPID, App.QQ_APPID, new ShareCallback() {
 			@Override
 			public void shareqq() {
-				if (item instanceof GirlModel) {
-					AmyQQ.getInstance(App.QQ_APPID).shareImage(WebviewActivity.this, ((GirlModel) item).picUrl, ((GirlModel) item).getMobileUrl(),
-							getString(R.string.app_name));
+				if (item instanceof BaseItemModel) {
+					AmyQQ.getInstance(App.QQ_APPID).shareImage(WebviewActivity.this, ((BaseItemModel) item).getImageURL(),
+							((BaseItemModel) item).getTargetURL(), getString(R.string.app_name));
 				}
 			}
 
 			@Override
 			public void sharewx() {
-				if (item instanceof GirlModel) {
-					AmyWX.getInstance(App.WX_APPID).share2WX(getString(R.string.app_share_title), ((GirlModel) item).title, ((GirlModel) item).getMobileUrl(),
-							false, BitmapFactory.decodeResource(getResources(), R.drawable.splash_logo));
+				if (item instanceof BaseItemModel) {
+					AmyWX.getInstance(App.WX_APPID).share2WX(getString(R.string.app_share_title), ((BaseItemModel) item).getTitle(),
+							((BaseItemModel) item).getTargetURL(), false, BitmapFactory.decodeResource(getResources(), R.drawable.splash_logo));
 				}
 			}
 
 			@Override
 			public void sharewxf() {
-				if (item instanceof GirlModel) {
-					AmyWX.getInstance(App.WX_APPID).share2WX(getString(R.string.app_share_title), ((GirlModel) item).title, ((GirlModel) item).getMobileUrl(),
-							true, BitmapFactory.decodeResource(getResources(), R.drawable.splash_logo));
+				if (item instanceof BaseItemModel) {
+					AmyWX.getInstance(App.WX_APPID).share2WX(getString(R.string.app_share_title), ((BaseItemModel) item).getTitle(),
+							((BaseItemModel) item).getTargetURL(), true, BitmapFactory.decodeResource(getResources(), R.drawable.splash_logo));
 				}
 			}
 
 			@Override
 			public void sharesms() {
-				if (item instanceof GirlModel) {
+				if (item instanceof BaseItemModel) {
 					Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:"));
-					intent.putExtra("sms_body", MessageFormat.format(getString(R.string.app_share_sms), ((GirlModel) item).getMobileUrl()));
+					intent.putExtra("sms_body", MessageFormat.format(getString(R.string.app_share_sms), ((BaseItemModel) item).getTargetURL()));
 					startActivity(intent);
 				}
 			}
