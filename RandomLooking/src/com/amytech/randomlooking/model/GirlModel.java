@@ -1,5 +1,7 @@
 package com.amytech.randomlooking.model;
 
+import java.io.Serializable;
+
 /**
  * Title: RandomLooking <br>
  * Description: <br>
@@ -10,7 +12,12 @@ package com.amytech.randomlooking.model;
  *
  * @author marktlzhai
  */
-public class GirlModel {
+public class GirlModel implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 254779968840285714L;
+
 	public String title;
 	public String description;
 	public String picUrl;

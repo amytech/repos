@@ -156,17 +156,17 @@ public class AmyQQ {
 		});
 	}
 
-	public void shareImage(Activity activity, QQLoginInterface listener, String imageLocalURL, String appName) {
+	public void shareImage(Activity activity, String imageLocalURL, String targetURL, String appName) {
 		Bundle params = new Bundle();
 		params.putString(QQShare.SHARE_TO_QQ_IMAGE_LOCAL_URL, imageLocalURL);
 		params.putString(QQShare.SHARE_TO_QQ_APP_NAME, appName);
+		params.putString(QQShare.SHARE_TO_QQ_TARGET_URL, targetURL);
 		params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_IMAGE);
 		params.putInt(QQShare.SHARE_TO_QQ_EXT_INT, QQShare.SHARE_TO_QQ_FLAG_QZONE_AUTO_OPEN);
-		// tencent.shareToQQ(activity, params, listener);
+		tencent.shareToQQ(activity, params, null);
 	}
 
-	public void shareMusic(Activity activity, QQLoginInterface listener, String title, String summary, String targetURL, String imageURL, String audioURL,
-			String appName) {
+	public void shareMusic(Activity activity, String title, String summary, String targetURL, String imageURL, String audioURL, String appName) {
 		final Bundle params = new Bundle();
 		params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_AUDIO);
 		params.putString(QQShare.SHARE_TO_QQ_TITLE, title);
@@ -176,16 +176,16 @@ public class AmyQQ {
 		params.putString(QQShare.SHARE_TO_QQ_AUDIO_URL, audioURL);
 		params.putString(QQShare.SHARE_TO_QQ_APP_NAME, appName);
 		params.putInt(QQShare.SHARE_TO_QQ_EXT_INT, QQShare.SHARE_TO_QQ_FLAG_QZONE_AUTO_OPEN);
-		// tencent.shareToQQ(activity, params, listener);
+		tencent.shareToQQ(activity, params, null);
 	}
 
-	public void shareAPP(Activity activity, QQLoginInterface listener, String title, String summary, String imageURL, String appName) {
+	public void shareAPP(Activity activity, String title, String summary, String imageURL, String appName) {
 		final Bundle params = new Bundle();
 		params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_APP);
 		params.putString(QQShare.SHARE_TO_QQ_TITLE, title);
 		params.putString(QQShare.SHARE_TO_QQ_SUMMARY, summary);
 		params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL, imageURL);
 		params.putString(QQShare.SHARE_TO_QQ_APP_NAME, appName);
-		// tencent.shareToQQ(activity, params, listener);
+		tencent.shareToQQ(activity, params, null);
 	}
 }

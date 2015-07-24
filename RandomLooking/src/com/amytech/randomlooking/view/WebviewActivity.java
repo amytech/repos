@@ -1,9 +1,25 @@
 package com.amytech.randomlooking.view;
 
+import java.io.Serializable;
+import java.text.MessageFormat;
+
+import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.view.View;
+import android.view.View.OnClickListener;
+
 import com.amytech.android.library.base.extras.BaseWebViewActivity;
-import com.amytech.android.library.utils.NLog;
+import com.amytech.android.library.share.AmyQQ;
+import com.amytech.android.library.share.AmyWX;
+import com.amytech.android.library.share.view.PickShareDialog;
+import com.amytech.android.library.share.view.PickShareDialog.ShareCallback;
 import com.amytech.android.library.views.Topbar;
+import com.amytech.android.library.views.Topbar.TopbarIcon;
 import com.amytech.android.library.views.webview.AmyWebView;
+import com.amytech.randomlooking.App;
+import com.amytech.randomlooking.R;
+import com.amytech.randomlooking.model.GirlModel;
 
 /**
  * Title: RandomLooking <br>
@@ -17,17 +33,86 @@ import com.amytech.android.library.views.webview.AmyWebView;
  */
 public class WebviewActivity extends BaseWebViewActivity {
 
-	public static final String DATA_KEY_TITLE = "DATA_KEY_TITLE";
-	public static final String DATA_KEY_URL = "DATA_KEY_URL";
+	public static final String DATA_ITEM = "DATA_ITEM";
 
 	@Override
 	public void initTopbar(Topbar topbar) {
-		topbar.setTitle(getIntent().getStringExtra(DATA_KEY_TITLE));
+		final Serializable item = getIntent().getSerializableExtra(DATA_ITEM);
+
+		if (item == null) {
+			finish();
+		}
+
+		topbar.configLeftImgBtn(TopbarIcon.BACK, new OnClickListener() {
+			public void onClick(View v) {
+				finish();
+			}
+		});
+
+		topbar.configRightImgBtn(TopbarIcon.SHARE, new OnClickListener() {
+			public void onClick(View v) {
+				share(item);
+			}
+		});
+
+		if (item instanceof GirlModel) {
+			topbar.setTitle(((GirlModel) item).title);
+		}
 	}
 
 	@Override
 	public void initWebview(AmyWebView webview) {
-		NLog.e("load url: " + getIntent().getStringExtra(DATA_KEY_URL));
-		webview.startLoadWebPage(getIntent().getStringExtra(DATA_KEY_URL));
+		Serializable item = getIntent().getSerializableExtra(DATA_ITEM);
+
+		if (item == null) {
+			finish();
+		}
+
+		if (item instanceof GirlModel) {
+			webview.startLoadWebPage(((GirlModel) item).getMobileUrl());
+		}
+	}
+
+	private void share(final Serializable item) {
+		PickShareDialog shareDialog = new PickShareDialog(this, App.WX_APPID, App.QQ_APPID, new ShareCallback() {
+			@Override
+			public void shareqq() {
+				if (item instanceof GirlModel) {
+					AmyQQ.getInstance(App.QQ_APPID).shareImage(WebviewActivity.this, ((GirlModel) item).picUrl, ((GirlModel) item).getMobileUrl(),
+							getString(R.string.app_name));
+				}
+			}
+
+			@Override
+			public void sharewx() {
+				if (item instanceof GirlModel) {
+					AmyWX.getInstance(App.WX_APPID).share2WX(getString(R.string.app_share_title), ((GirlModel) item).title, ((GirlModel) item).getMobileUrl(),
+							false, BitmapFactory.decodeResource(getResources(), R.drawable.splash_logo));
+				}
+			}
+
+			@Override
+			public void sharewxf() {
+				if (item instanceof GirlModel) {
+					AmyWX.getInstance(App.WX_APPID).share2WX(getString(R.string.app_share_title), ((GirlModel) item).title, ((GirlModel) item).getMobileUrl(),
+							true, BitmapFactory.decodeResource(getResources(), R.drawable.splash_logo));
+				}
+			}
+
+			@Override
+			public void sharesms() {
+				if (item instanceof GirlModel) {
+					Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:"));
+					intent.putExtra("sms_body", MessageFormat.format(getString(R.string.app_share_sms), ((GirlModel) item).getMobileUrl()));
+					startActivity(intent);
+				}
+			}
+
+			@Override
+			public void shareCancel() {
+
+			}
+		});
+		shareDialog.show();
 	}
 }

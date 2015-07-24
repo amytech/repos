@@ -1,10 +1,13 @@
 package com.amytech.randomlooking.view.fragment;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,11 +21,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.amytech.android.library.base.extras.BaseTabItemFragment;
+import com.amytech.android.library.share.AmyQQ;
+import com.amytech.android.library.share.AmyWX;
 import com.amytech.android.library.share.view.PickShareDialog;
 import com.amytech.android.library.share.view.PickShareDialog.ShareCallback;
 import com.amytech.android.library.utils.ImageUtils;
 import com.amytech.android.library.views.Topbar;
-import com.amytech.android.library.views.Topbar.TopbarIcon;
 import com.amytech.randomlooking.App;
 import com.amytech.randomlooking.R;
 import com.amytech.randomlooking.manager.GirlManager;
@@ -44,7 +48,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
  *
  * @author marktlzhai
  */
-public class FragmentGirl extends BaseTabItemFragment implements GirlGetCallback, ShareCallback {
+public class FragmentGirl extends BaseTabItemFragment implements GirlGetCallback {
 
 	private static final int LOAD_COUNT = 50;
 
@@ -67,11 +71,6 @@ public class FragmentGirl extends BaseTabItemFragment implements GirlGetCallback
 	protected void initViews() {
 		topbar = (Topbar) findViewById(R.id.topbar);
 		topbar.setTitle(R.string.tab_girl);
-		topbar.configRightImgBtn(TopbarIcon.SHARE, new OnClickListener() {
-			public void onClick(View v) {
-
-			}
-		});
 
 		girlLoadingView = (TextView) findViewById(R.id.reload_text);
 		girlList = (PullToRefreshListView) findViewById(R.id.girl_list);
@@ -91,10 +90,9 @@ public class FragmentGirl extends BaseTabItemFragment implements GirlGetCallback
 		girlList.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				GirlModel item = (GirlModel) parent.getItemAtPosition(position);
+				final GirlModel item = (GirlModel) parent.getItemAtPosition(position);
 				Intent i = new Intent(getActivity(), WebviewActivity.class);
-				i.putExtra(WebviewActivity.DATA_KEY_TITLE, item.title);
-				i.putExtra(WebviewActivity.DATA_KEY_URL, item.getMobileUrl());
+				i.putExtra(WebviewActivity.DATA_ITEM, item);
 				startActivity(i);
 			}
 		});
@@ -168,7 +166,7 @@ public class FragmentGirl extends BaseTabItemFragment implements GirlGetCallback
 		public View getView(int position, View convertView, ViewGroup parent) {
 			ViewHolder holder;
 
-			GirlModel item = getItem(position);
+			final GirlModel item = getItem(position);
 
 			if (convertView == null) {
 				convertView = inflater.inflate(R.layout.item_girl, parent, false);
@@ -187,7 +185,36 @@ public class FragmentGirl extends BaseTabItemFragment implements GirlGetCallback
 			ImageUtils.displayImage(App.getInstance(), holder.girlImage, item.picUrl, R.dimen.girl_image_size, R.dimen.girl_image_size);
 			holder.girlShare.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
-					PickShareDialog shareDialog = new PickShareDialog(getActivity(), App.WX_APPID, App.QQ_APPID, FragmentGirl.this);
+					PickShareDialog shareDialog = new PickShareDialog(getActivity(), App.WX_APPID, App.QQ_APPID, new ShareCallback() {
+						@Override
+						public void shareqq() {
+							AmyQQ.getInstance(App.QQ_APPID).shareImage(getActivity(), item.picUrl, item.getMobileUrl(), getString(R.string.app_name));
+						}
+
+						@Override
+						public void sharewx() {
+							AmyWX.getInstance(App.WX_APPID).share2WX(getString(R.string.app_share_title), item.title, item.getMobileUrl(), false,
+									BitmapFactory.decodeResource(getResources(), R.drawable.splash_logo));
+						}
+
+						@Override
+						public void sharewxf() {
+							AmyWX.getInstance(App.WX_APPID).share2WX(getString(R.string.app_share_title), item.title, item.getMobileUrl(), true,
+									BitmapFactory.decodeResource(getResources(), R.drawable.splash_logo));
+						}
+
+						@Override
+						public void sharesms() {
+							Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:"));
+							intent.putExtra("sms_body", MessageFormat.format(getString(R.string.app_share_sms), item.getMobileUrl()));
+							startActivity(intent);
+						}
+
+						@Override
+						public void shareCancel() {
+
+						}
+					});
 					shareDialog.show();
 				}
 			});
@@ -200,30 +227,5 @@ public class FragmentGirl extends BaseTabItemFragment implements GirlGetCallback
 		public ImageView girlImage;
 		public TextView girlTitle;
 		public View girlShare;
-	}
-
-	@Override
-	public void shareqq() {
-		showToast("share to qq");
-	}
-
-	@Override
-	public void sharewx() {
-		showToast("share to wx");
-	}
-
-	@Override
-	public void sharewxf() {
-		showToast("share to wxf");
-	}
-
-	@Override
-	public void sharesms() {
-		showToast("share to sms");
-	}
-
-	@Override
-	public void shareCancel() {
-		showToast("share cancel");
 	}
 }
