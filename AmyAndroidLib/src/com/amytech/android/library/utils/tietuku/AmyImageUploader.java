@@ -21,7 +21,7 @@ import android.util.Log;
  *
  * @author marktlzhai
  */
-public class AmyImageUploader extends AsyncTask<UploadRequest, Long, UploadResponse> {
+class AmyImageUploader extends AsyncTask<UploadRequest, Long, UploadResponse> {
 
 	public interface UploadListener {
 		void onStart();

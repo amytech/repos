@@ -14,4 +14,9 @@ import java.io.File;
  */
 public class UploadRequest {
 	public File uploadFile;
+
+	public UploadRequest(File uploadFile) {
+		super();
+		this.uploadFile = uploadFile;
+	}
 }
