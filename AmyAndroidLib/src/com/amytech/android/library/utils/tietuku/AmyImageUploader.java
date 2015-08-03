@@ -11,6 +11,8 @@ import org.json.JSONObject;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.amytech.android.library.utils.tietuku.TieTuKuManager.UploadListener;
+
 /**
  * Title: AmyImageLibrary <br>
  * Description: <br>
@@ -22,16 +24,6 @@ import android.util.Log;
  * @author marktlzhai
  */
 class AmyImageUploader extends AsyncTask<UploadRequest, Long, UploadResponse> {
-
-	public interface UploadListener {
-		void onStart();
-
-		void onProgressUpdate(long uploadedSize, long totalSize);
-
-		void onSuccess(UploadResponse response);
-
-		void onFailure();
-	}
 
 	private static final String UPLOAD_URL = "http://up.tietuku.com/";
 

@@ -1,16 +1,21 @@
 package com.amytech.android.library.utils.tietuku;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.http.Header;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.content.Context;
 
 import com.amytech.android.library.base.BaseManager;
+import com.amytech.android.library.utils.NLog;
 import com.amytech.android.library.utils.asynchttp.JsonHttpResponseHandler;
 import com.amytech.android.library.utils.asynchttp.RequestParams;
-import com.amytech.android.library.utils.tietuku.AmyImageUploader.UploadListener;
+import com.amytech.android.library.utils.tietuku.model.TTKAlbum;
+import com.amytech.android.library.utils.tietuku.model.TTKPicture;
 
 /**
  * Title: AmyAndroidLib <br>
@@ -23,6 +28,28 @@ import com.amytech.android.library.utils.tietuku.AmyImageUploader.UploadListener
  * @author marktlzhai
  */
 public class TieTuKuManager extends BaseManager {
+
+	public interface UploadListener {
+		void onStart();
+
+		void onProgressUpdate(long uploadedSize, long totalSize);
+
+		void onSuccess(UploadResponse response);
+
+		void onFailure();
+	}
+
+	public interface GetAlbumListener {
+		void getAlbumSuccess(List<TTKAlbum> albumList, int total);
+
+		void getAlbumFailure(String errorMessage);
+	}
+
+	public interface GetAlbumPicListener {
+		void getAlbumPicSuccess(List<TTKPicture> result, int total);
+
+		void getAlbumPicFailure(String errorMessage);
+	}
 
 	private static TieTuKuManager instance;
 
@@ -47,7 +74,62 @@ public class TieTuKuManager extends BaseManager {
 		uploader.execute(request);
 	}
 
-	public void getAlbum(String openKey, int page) {
+	public void getAlbumPictures(String openKey, int albumID, int page, final GetAlbumPicListener listener) {
+		String url = "http://api.tietuku.com/v2/api/getpiclist";
+		RequestParams params = new RequestParams();
+		params.add("key", openKey);
+		params.add("returntype", "json");
+		params.add("aid", String.valueOf(albumID));
+		params.add("p", String.valueOf(page));
+		CLIENT.post(url, params, new JsonHttpResponseHandler() {
+			@Override
+			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+				super.onSuccess(statusCode, headers, response);
+				if (listener != null) {
+
+					List<TTKPicture> result = new ArrayList<TTKPicture>();
+
+					int total = response.optInt("total");
+					JSONArray picArry = response.optJSONArray("pic");
+					if (picArry != null && picArry.length() > 0) {
+						TTKPicture item = null;
+						for (int i = 0; i < picArry.length(); i++) {
+							JSONObject picObj = picArry.optJSONObject(i);
+
+							int id = picObj.optInt("id");
+							String name = picObj.optString("name");
+							String linkurl = picObj.optString("linkurl");
+							String showurl = picObj.optString("showurl");
+							String ext = picObj.optString("ext");
+							int width = picObj.optInt("width");
+							int height = picObj.optInt("height");
+
+							item = new TTKPicture(id, linkurl);
+							item.name = name;
+							item.showURL = showurl;
+							item.ext = ext;
+							item.width = width;
+							item.height = height;
+
+							result.add(item);
+						}
+					}
+
+					listener.getAlbumPicSuccess(result, total);
+				}
+			}
+
+			@Override
+			public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+				super.onFailure(statusCode, headers, responseString, throwable);
+				if (listener != null) {
+					listener.getAlbumPicFailure(responseString);
+				}
+			}
+		});
+	}
+
+	public void getAlbum(String openKey, int page, final GetAlbumListener listener) {
 		String url = "http://api.tietuku.com/v2/api/getalbum";
 		RequestParams params = new RequestParams();
 		params.add("key", openKey);
@@ -57,11 +139,44 @@ public class TieTuKuManager extends BaseManager {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 				super.onSuccess(statusCode, headers, response);
+				if (listener != null) {
+					ArrayList<TTKAlbum> result = new ArrayList<TTKAlbum>();
+
+					int total = response.optInt("total");
+					JSONArray albumArray = response.optJSONArray("album");
+
+					if (albumArray != null && albumArray.length() > 0) {
+						TTKAlbum item = null;
+						for (int i = 0; i < albumArray.length(); i++) {
+							JSONObject albumObj = albumArray.optJSONObject(i);
+							if (albumObj != null) {
+								item = new TTKAlbum();
+								item.aid = albumObj.optInt("aid");
+								item.albumname = albumObj.optString("albumname");
+								JSONArray picArray = albumObj.optJSONArray("pic");
+								if (picArray != null && picArray.length() > 0) {
+									for (int j = 0; j < albumArray.length(); j++) {
+										JSONObject picObj = picArray.optJSONObject(j);
+										if (picObj != null) {
+											item.pics.add(new TTKPicture(picObj.optInt("id"), picObj.optString("url")));
+										}
+									}
+								}
+								result.add(item);
+							}
+						}
+					}
+
+					listener.getAlbumSuccess(result, total);
+				}
 			}
 
 			@Override
 			public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 				super.onFailure(statusCode, headers, responseString, throwable);
+				if (listener != null) {
+					listener.getAlbumFailure(responseString);
+				}
 			}
 		});
 	}
