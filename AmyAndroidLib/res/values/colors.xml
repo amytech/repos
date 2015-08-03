@@ -13,6 +13,7 @@
 
     <!-- 默认界面颜色 -->
     <color name="color_base_background">#1F2121</color>
+    <color name="color_base_sub_background">#111111</color>
     <!-- 页面底色 -->
     <color name="color_base_dialog">#F1F2F3</color>
 
