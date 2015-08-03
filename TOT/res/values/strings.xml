@@ -3,4 +3,34 @@
 
     <string name="app_name">帮你选</string>
 
+    <!-- SplashActivity -->
+    <string name="splash_title">帮你选</string>
+    <string name="splash_subtitle">选择综合证患者的福音</string>
+
+    <!-- Drawer -->
+    <string name="drawer_hot">最热排行</string>
+    <string name="drawer_new">最新排行</string>
+    <string name="drawer_share">分享该软件</string>
+    <string name="drawer_settings">系统设置</string>
+    <string name="drawer_feedback">用户反馈</string>
+    <string name="drawer_about">关于</string>
+
+    <!-- PublishTOTActivity -->
+    <string name="publish_title">主题</string>
+    <string name="publish_title_hint">请填写主题</string>
+    <string name="publish_desc">描述</string>
+    <string name="publish_desc_hint">请填写描述</string>
+    <string name="publish_item_add">+添加选项(最多6个)</string>
+    <string name="publish_item_add_error">最多只能添加6个选项</string>
+    <string name="publish_item1">选项一</string>
+    <string name="publish_item2">选项二</string>
+    <string name="publish_item3">选项三</string>
+    <string name="publish_item4">选项四</string>
+    <string name="publish_item5">选项五</string>
+    <string name="publish_item6">选项六</string>
+    <string name="publish_item_hint">请填写该选项的描述\n也可以添加图片</string>
+    <string name="publish_mode">选择模式</string>
+    <string name="publish_mode_s">单选</string>
+    <string name="publish_mode_m">多选</string>
+
 </resources>
