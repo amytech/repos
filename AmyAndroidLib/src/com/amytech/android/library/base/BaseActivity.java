@@ -2,12 +2,15 @@ package com.amytech.android.library.base;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.amytech.android.library.utils.SPUtils;
+import com.amytech.android.library.utils.StringUtils;
 import com.amytech.android.library.utils.UIUtils;
 import com.amytech.umeng.analytics.UMengBaseActivity;
 
@@ -69,6 +72,16 @@ public abstract class BaseActivity extends UMengBaseActivity {
 		spUtils = new SPUtils(getPackageName());
 
 		initViews();
+
+		if (StringUtils.isNotEmpty(getTypeFaceAssetsName())) {
+			Typeface tf = Typeface.createFromAsset(getAssets(), getTypeFaceAssetsName());
+			ViewGroup viewGroup = (ViewGroup) getWindow().getDecorView();
+			UIUtils.setTypeFace(viewGroup, tf);
+		}
+	}
+
+	protected String getTypeFaceAssetsName() {
+		return "";
 	}
 
 	protected void showToast(String message) {
