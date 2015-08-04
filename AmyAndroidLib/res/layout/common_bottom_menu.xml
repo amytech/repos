@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:divider="@android:color/transparent"
+        android:dividerHeight="1dp"
         android:scrollbars="none" />
 
     <Button

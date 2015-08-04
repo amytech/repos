@@ -26,7 +26,7 @@
     <string name="logining">登录中&#8230;</string>
     <string name="regist">注册</string>
     <string name="regist_success">注册成功</string>
-    <string name="regist_failure">注册失败，请稍后再试</string>
+    <string name="regist_failure">注册失败\n如果注册过，请直接登录</string>
     <string name="logout">退出登录</string>
     <string name="share_to">分享到</string>
     <string name="share_to_friend">分享给朋友</string>
