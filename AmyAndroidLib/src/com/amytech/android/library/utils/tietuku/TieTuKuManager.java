@@ -11,7 +11,6 @@ import org.json.JSONObject;
 import android.content.Context;
 
 import com.amytech.android.library.base.BaseManager;
-import com.amytech.android.library.utils.NLog;
 import com.amytech.android.library.utils.asynchttp.JsonHttpResponseHandler;
 import com.amytech.android.library.utils.asynchttp.RequestParams;
 import com.amytech.android.library.utils.tietuku.model.TTKAlbum;
@@ -28,6 +27,29 @@ import com.amytech.android.library.utils.tietuku.model.TTKPicture;
  * @author marktlzhai
  */
 public class TieTuKuManager extends BaseManager {
+
+	public static class UploadAdapter implements UploadListener {
+
+		@Override
+		public void onStart() {
+
+		}
+
+		@Override
+		public void onProgressUpdate(long uploadedSize, long totalSize) {
+
+		}
+
+		@Override
+		public void onSuccess(UploadResponse response) {
+
+		}
+
+		@Override
+		public void onFailure() {
+
+		}
+	}
 
 	public interface UploadListener {
 		void onStart();

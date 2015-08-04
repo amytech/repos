@@ -22,5 +22,7 @@
     <string name="share_sms">短信</string>
     <string name="share_to">分享到</string>
     <string name="share_to_friend">分享给朋友</string>
+    <string name="take_picture">拍照</string>
+    <string name="choose_picture">选择图片</string>
 
 </resources>
