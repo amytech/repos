@@ -17,6 +17,8 @@ import com.amytech.umeng.analytics.UMengAnalytic;
  */
 public class TOTApp extends BaseApplication {
 
+	public static final String IMAGE_TOKEN = "7f4fc67f5bad806e91d6a4478171d388b07ac32e:alRxQ25RRXJJbzVQNzJYZEJDbTRWMEk0OFcwPQ==:eyJkZWFkbGluZSI6MTQzODY1ODk4MiwiYWN0aW9uIjoiZ2V0IiwidWlkIjoiNTEzMTUxIiwiYWlkIjoiMTA3MDczMiJ9";
+
 	public static final String UMENG_APPKEY = "55bf216967e58e865100542d";
 
 	public static final String SERVER_APP_ID = "3703a8b6fd29c562415fc91562c91bd5";

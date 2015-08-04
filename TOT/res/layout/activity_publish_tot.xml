@@ -123,23 +123,11 @@
                         android:textSize="18sp" />
                 </LinearLayout>
 
-                <HorizontalScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="5dp" >
-
-                    <LinearLayout
-                        android:id="@+id/publish_item1_images"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" >
-
-                        <ImageView
-                            android:id="@+id/publish_item1_image_add"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:src="@drawable/image_add" />
-                    </LinearLayout>
-                </HorizontalScrollView>
+                <ImageView
+                    android:id="@+id/publish_item1_image_add"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/image_add" />
             </LinearLayout>
 
             <View
@@ -180,23 +168,11 @@
                         android:textSize="18sp" />
                 </LinearLayout>
 
-                <HorizontalScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="5dp" >
-
-                    <LinearLayout
-                        android:id="@+id/publish_item2_images"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" >
-
-                        <ImageView
-                            android:id="@+id/publish_item2_image_add"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:src="@drawable/image_add" />
-                    </LinearLayout>
-                </HorizontalScrollView>
+                <ImageView
+                    android:id="@+id/publish_item2_image_add"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/image_add" />
             </LinearLayout>
 
             <LinearLayout
@@ -240,23 +216,11 @@
                         android:textSize="18sp" />
                 </LinearLayout>
 
-                <HorizontalScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="5dp" >
-
-                    <LinearLayout
-                        android:id="@+id/publish_item3_images"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" >
-
-                        <ImageView
-                            android:id="@+id/publish_item3_image_add"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:src="@drawable/image_add" />
-                    </LinearLayout>
-                </HorizontalScrollView>
+                <ImageView
+                    android:id="@+id/publish_item3_image_add"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/image_add" />
             </LinearLayout>
 
             <LinearLayout
@@ -300,23 +264,11 @@
                         android:textSize="18sp" />
                 </LinearLayout>
 
-                <HorizontalScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="5dp" >
-
-                    <LinearLayout
-                        android:id="@+id/publish_item4_images"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" >
-
-                        <ImageView
-                            android:id="@+id/publish_item4_image_add"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:src="@drawable/image_add" />
-                    </LinearLayout>
-                </HorizontalScrollView>
+                <ImageView
+                    android:id="@+id/publish_item4_image_add"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/image_add" />
             </LinearLayout>
 
             <LinearLayout
@@ -360,23 +312,11 @@
                         android:textSize="18sp" />
                 </LinearLayout>
 
-                <HorizontalScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="5dp" >
-
-                    <LinearLayout
-                        android:id="@+id/publish_item5_images"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" >
-
-                        <ImageView
-                            android:id="@+id/publish_item5_image_add"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:src="@drawable/image_add" />
-                    </LinearLayout>
-                </HorizontalScrollView>
+                <ImageView
+                    android:id="@+id/publish_item5_image_add"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/image_add" />
             </LinearLayout>
 
             <LinearLayout
@@ -420,23 +360,12 @@
                         android:textSize="18sp" />
                 </LinearLayout>
 
-                <HorizontalScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="5dp" >
-
-                    <LinearLayout
-                        android:id="@+id/publish_item6_images"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" >
-
-                        <ImageView
-                            android:id="@+id/publish_item6_image_add"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:src="@drawable/image_add" />
-                    </LinearLayout>
-                </HorizontalScrollView>
+                <ImageView
+                    android:id="@+id/publish_item6_image_add"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/image_add" />
             </LinearLayout>
 
             <View

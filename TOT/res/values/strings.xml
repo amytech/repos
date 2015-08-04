@@ -16,6 +16,8 @@
     <string name="drawer_about">关于</string>
 
     <!-- PublishTOTActivity -->
+    <string name="publish">发布</string>
+    <string name="publish_success">发布成功</string>
     <string name="publish_title">主题</string>
     <string name="publish_title_hint">请填写主题</string>
     <string name="publish_desc">描述</string>
@@ -28,9 +30,12 @@
     <string name="publish_item4">选项四</string>
     <string name="publish_item5">选项五</string>
     <string name="publish_item6">选项六</string>
-    <string name="publish_item_hint">请填写该选项的描述\n也可以添加图片</string>
+    <string name="publish_item_hint">请填写该选项的描述\n也可以添加图片,长按图片删除</string>
     <string name="publish_mode">选择模式</string>
     <string name="publish_mode_s">单选</string>
     <string name="publish_mode_m">多选</string>
+    <string name="publish_err_upload">上传失败，请重试</string>
+    <string name="publish_err_title">必须填入一个主题</string>
+    <string name="publish_err_item">至少填入两个选项</string>
 
 </resources>
