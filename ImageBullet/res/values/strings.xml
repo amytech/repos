@@ -3,4 +3,24 @@
 
     <string name="app_name">图弹来一发</string>
 
+    <!-- Drawer -->
+    <string name="drawer_hot">最热排行</string>
+    <string name="drawer_new">最新排行</string>
+    <string name="drawer_share">分享该软件</string>
+    <string name="drawer_settings">系统设置</string>
+    <string name="drawer_feedback">用户反馈</string>
+    <string name="drawer_about">关于</string>
+
+    <!-- SplashActivity -->
+    <string name="enter_look">随便看看</string>
+    <string name="login_qq">QQ登录</string>
+
+    <!-- LoginActivity -->
+    <string name="email_hint">邮箱</string>
+    <string name="email_input_error">邮箱格式不正确</string>
+    <string name="password_hint">密码</string>
+    <string name="password_input_error">请填入密码</string>
+    <string name="goto_reg">还没有账号，去注册>></string>
+    <string name="goto_login">已有账号，去登录>></string>
+
 </resources>
