@@ -84,4 +84,11 @@ public class StringUtils {
 	public static String ISO885912UTF8(String gb2312Str) {
 		return new String(gb2312Str.getBytes(ISO_8859_1_CHARSET), UTF8_CHARSET);
 	}
+
+	public static boolean isEmailValid(CharSequence email) {
+		if (isEmpty(email)) {
+			return false;
+		}
+		return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+	}
 }

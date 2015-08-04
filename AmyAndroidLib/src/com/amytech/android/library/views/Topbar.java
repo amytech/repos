@@ -27,15 +27,31 @@ public class Topbar extends RelativeLayout {
 		// 无
 		NONE(0),
 		// 返回
-		BACK(R.drawable.icon_arrow_left),
+		BACK(R.drawable.topbar_back),
 		// 设置
-		SETTINGS(R.drawable.icon_settings),
+		SETTINGS(R.drawable.topbar_setting),
 		// 分享
-		SHARE(R.drawable.icon_share),
+		SHARE(R.drawable.topbar_share),
 		// 添加
-		ADD(R.drawable.icon_add),
+		ADD(R.drawable.topbar_add),
 		// 菜单
-		MENU(R.drawable.icon_menu);
+		MENU(R.drawable.topbar_more),
+		// 相机
+		CAMERA(R.drawable.topbar_camera),
+		// 关闭
+		CLOSE(R.drawable.topbar_close),
+		// 定位
+		LOCATION(R.drawable.topbar_location),
+		// 喜欢
+		LOVE(R.drawable.topbar_love),
+		// ok
+		OK(R.drawable.topbar_ok),
+		// RSS
+		RSS(R.drawable.topbar_rss),
+		// 放大
+		ZOOMIN(R.drawable.topbar_zoomin),
+		// 缩小
+		ZOOMOUT(R.drawable.topbar_zoomout);
 
 		private int selector;
 
@@ -51,10 +67,8 @@ public class Topbar extends RelativeLayout {
 	private TextView titleView;
 
 	private ImageView leftButton;
-	private View leftDivider;
 
 	private ImageView rightButton;
-	private View rightDivider;
 
 	public Topbar(Context context) {
 		super(context);
@@ -77,14 +91,10 @@ public class Topbar extends RelativeLayout {
 
 		titleView = (TextView) rootView.findViewById(R.id.topbar_title);
 
-		leftDivider = rootView.findViewById(R.id.topbar_divider_left);
 		leftButton = (ImageView) rootView.findViewById(R.id.topbar_imgbtn_left);
-		leftDivider.setVisibility(View.GONE);
 		leftButton.setVisibility(View.GONE);
 
-		rightDivider = rootView.findViewById(R.id.topbar_divider_right);
 		rightButton = (ImageView) rootView.findViewById(R.id.topbar_imgbtn_right);
-		rightDivider.setVisibility(View.GONE);
 		rightButton.setVisibility(View.GONE);
 
 		addView(rootView, LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
@@ -104,10 +114,8 @@ public class Topbar extends RelativeLayout {
 	public void configLeftImgBtn(TopbarIcon imgIcon, OnClickListener listener) {
 		if (imgIcon == null || imgIcon.getSelector() == 0) {
 			leftButton.setVisibility(View.GONE);
-			leftDivider.setVisibility(View.GONE);
 		} else {
 			leftButton.setVisibility(View.VISIBLE);
-			leftDivider.setVisibility(View.VISIBLE);
 			leftButton.setImageResource(imgIcon.getSelector());
 			leftButton.setOnClickListener(listener);
 		}
@@ -119,10 +127,8 @@ public class Topbar extends RelativeLayout {
 	public void configRightImgBtn(TopbarIcon imgIcon, OnClickListener listener) {
 		if (imgIcon == null || imgIcon.getSelector() == 0) {
 			rightButton.setVisibility(View.GONE);
-			rightDivider.setVisibility(View.GONE);
 		} else {
 			rightButton.setVisibility(View.VISIBLE);
-			rightDivider.setVisibility(View.VISIBLE);
 			rightButton.setImageResource(imgIcon.getSelector());
 			rightButton.setOnClickListener(listener);
 		}

@@ -17,15 +17,8 @@
             android:layout_height="@dimen/height_topbar"
             android:background="@drawable/selector_topbar_bg"
             android:clickable="true"
-            android:padding="10dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/icon_eyes" />
-
-        <View
-            android:id="@+id/topbar_divider_left"
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@android:color/black" />
+            android:scaleType="fitXY"
+            android:src="@drawable/topbar_more" />
     </LinearLayout>
 
     <TextView
@@ -50,22 +43,14 @@
         android:layout_alignParentRight="true"
         android:orientation="horizontal" >
 
-        <View
-            android:id="@+id/topbar_divider_right"
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0"
-            android:background="@android:color/black" />
-
         <ImageView
             android:id="@+id/topbar_imgbtn_right"
             android:layout_width="@dimen/height_topbar"
             android:layout_height="@dimen/height_topbar"
             android:background="@drawable/selector_topbar_bg"
             android:clickable="true"
-            android:padding="10dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/icon_share" />
+            android:scaleType="fitXY"
+            android:src="@drawable/topbar_camera" />
     </LinearLayout>
 
     <View
