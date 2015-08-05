@@ -3,4 +3,12 @@
 
     <string name="app_name">寻找淘女郎</string>
 
+    <!-- SplashActivity -->
+    <string name="splash_status_loading">正在连接淘女郎集中营</string>
+    <string name="splash_status_success">连接成功，赶快进入挑选吧</string>
+    <string name="splash_status_failure">连接失败，重试或进入离线模式</string>
+    <string name="enter_offline">离线模式</string>
+    <string name="enter">开始挑选</string>
+    <string name="enter_reload">重新连接</string>
+
 </resources>
