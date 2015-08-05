@@ -25,6 +25,7 @@ public class BaseManager {
 	public BaseManager(Context context) {
 		this.context = context;
 
+		CLIENT.setTimeout(2000);
 		CLIENT.setUserAgent("Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36");
 		spUtils = new SPUtils(BaseApplication.getInstance().getPackageName());
 	}
