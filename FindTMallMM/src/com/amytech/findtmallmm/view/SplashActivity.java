@@ -61,6 +61,7 @@ public class SplashActivity extends BaseActivity implements APIListener {
 		enterButton = (Button) findViewById(R.id.enter);
 		enterButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
+				startActivity(HomeActivity.class);
 				finish();
 			}
 		});
@@ -68,6 +69,7 @@ public class SplashActivity extends BaseActivity implements APIListener {
 		enterOfflineButton = (Button) findViewById(R.id.enter_offline);
 		enterOfflineButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
+				startActivity(HomeOfflineActivity.class);
 				finish();
 			}
 		});
