@@ -11,4 +11,7 @@
     <string name="enter">开始挑选</string>
     <string name="enter_reload">重新连接</string>
 
+    <!-- HomeActivity -->
+    <string name="load_mm_error">数据加载失败</string>
+
 </resources>

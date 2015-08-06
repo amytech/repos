@@ -3,6 +3,9 @@ package com.amytech.findtmallmm.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import com.amytech.android.library.api.BaseAPIResponse;
 
 /**
@@ -19,19 +22,25 @@ public class MMResponse {
 
 	public int total = 0;
 	public int pageSize = 0;
-	public int currentPage = 0;
+	public int currentPage = 1;
 	public List<MM> mmList = new ArrayList<MM>();
-
-	private BaseAPIResponse response;
 
 	public MMResponse() {
 	}
 
-	public BaseAPIResponse getResponse() {
-		return response;
-	}
-
 	public void setResponse(BaseAPIResponse response) {
-		this.response = response;
+		JSONObject mmData = response.returnObject.optJSONObject("pagebean");
+		if (mmData != null) {
+			total = mmData.optInt("allNum");
+			pageSize = mmData.optInt("allPages");
+			currentPage = mmData.optInt("currentPage");
+			JSONArray mmArry = mmData.optJSONArray("contentlist");
+			if (mmArry != null && mmArry.length() > 0) {
+				mmList.clear();
+				for (int i = 0; i < mmArry.length(); i++) {
+					mmList.add(new MM(mmArry.optJSONObject(i)));
+				}
+			}
+		}
 	}
 }

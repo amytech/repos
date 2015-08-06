@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 /**
  * Title: FindTMallMM <br>
  * Description: <br>
@@ -23,7 +26,7 @@ public class MM implements Serializable {
 
 	public String avatarUrl = "";
 
-	public String cardUrl = "";
+	public String type = "";
 
 	public String city = "";
 
@@ -41,4 +44,24 @@ public class MM implements Serializable {
 
 	public String url = "";
 
+	public MM(JSONObject mmObj) {
+		if (mmObj != null) {
+			avatarUrl = mmObj.optString("avatarUrl");
+			type = mmObj.optString("type");
+			city = mmObj.optString("city");
+			height = mmObj.optInt("height");
+			weight = mmObj.optInt("weight");
+			realName = mmObj.optString("realName");
+			totalFanNum = mmObj.optInt("totalFanNum");
+			userID = mmObj.optLong("userId");
+			url = mmObj.optString("link");
+			JSONArray mmImgArry = mmObj.optJSONArray("imgList");
+			images.clear();
+			if (mmImgArry != null && mmImgArry.length() > 0) {
+				for (int i = 0; i < mmImgArry.length(); i++) {
+					images.add(mmImgArry.optString(i));
+				}
+			}
+		}
+	}
 }
