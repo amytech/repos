@@ -133,4 +133,12 @@ public class Topbar extends RelativeLayout {
 			rightButton.setOnClickListener(listener);
 		}
 	}
+
+	public ImageView getLeftButton() {
+		return leftButton;
+	}
+
+	public ImageView getRightButton() {
+		return rightButton;
+	}
 }
