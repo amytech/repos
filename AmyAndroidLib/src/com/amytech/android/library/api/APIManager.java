@@ -50,9 +50,12 @@ public class APIManager extends BaseManager {
 		params.put("showapi_sign", request.secret);
 		params.put("showapi_timestamp", request.timestamp);
 		CLIENT.post(apiURL, params, new JsonHttpResponseHandler() {
+			private boolean success = false;
+
 			@Override
 			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 				super.onSuccess(statusCode, headers, response);
+				success = true;
 				if (listener != null) {
 					int returnCode = response.optInt("showapi_res_code", -1);
 					String returnMessage = response.optString("showapi_res_error");
@@ -69,7 +72,16 @@ public class APIManager extends BaseManager {
 			@Override
 			public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 				super.onFailure(statusCode, headers, responseString, throwable);
+				success = false;
 				if (listener != null) {
+					listener.onAPIFailure();
+				}
+			}
+
+			@Override
+			public void onFinish() {
+				super.onFinish();
+				if (listener != null && !success) {
 					listener.onAPIFailure();
 				}
 			}

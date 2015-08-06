@@ -104,9 +104,13 @@ public class TieTuKuManager extends BaseManager {
 		params.add("aid", String.valueOf(albumID));
 		params.add("p", String.valueOf(page));
 		CLIENT.post(url, params, new JsonHttpResponseHandler() {
+			private boolean success = false;
+
 			@Override
 			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 				super.onSuccess(statusCode, headers, response);
+				success = true;
+
 				if (listener != null) {
 
 					List<TTKPicture> result = new ArrayList<TTKPicture>();
@@ -144,8 +148,18 @@ public class TieTuKuManager extends BaseManager {
 			@Override
 			public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 				super.onFailure(statusCode, headers, responseString, throwable);
+				success = false;
+
 				if (listener != null) {
 					listener.getAlbumPicFailure(responseString);
+				}
+			}
+
+			@Override
+			public void onFinish() {
+				super.onFinish();
+				if (listener != null && !success) {
+					listener.getAlbumPicFailure("网络不可用");
 				}
 			}
 		});
@@ -158,9 +172,13 @@ public class TieTuKuManager extends BaseManager {
 		params.add("returntype", "json");
 		params.add("p", String.valueOf(page));
 		CLIENT.post(url, params, new JsonHttpResponseHandler() {
+
+			private boolean success = false;
+
 			@Override
 			public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 				super.onSuccess(statusCode, headers, response);
+				success = true;
 				if (listener != null) {
 					ArrayList<TTKAlbum> result = new ArrayList<TTKAlbum>();
 
@@ -196,8 +214,17 @@ public class TieTuKuManager extends BaseManager {
 			@Override
 			public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 				super.onFailure(statusCode, headers, responseString, throwable);
+				success = false;
 				if (listener != null) {
 					listener.getAlbumFailure(responseString);
+				}
+			}
+
+			@Override
+			public void onFinish() {
+				super.onFinish();
+				if (listener != null && !success) {
+					listener.getAlbumFailure("网络不可用");
 				}
 			}
 		});
